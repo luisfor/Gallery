@@ -17,5 +17,12 @@ app.use(bodyparser.json());
 
 //rewrite routes
 
+//routes test
+app.get('/test', (req, res) => {
+    return res.status(200).send({
+        message: "Success"
+    });
+});
+
 //export module
 module.exports = app;

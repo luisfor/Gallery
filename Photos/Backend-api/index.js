@@ -12,7 +12,7 @@ mongoose.connect('mongodb://localhost:27017/photos', { useNewUrlParser: true})
 
             //Create server
             app.listen(port, () => {
-                console.log('Server run Susccess');
+                console.log('Server run Success');
                 
             })
 

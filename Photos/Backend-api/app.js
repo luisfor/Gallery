@@ -8,6 +8,7 @@ let bodyparser = require('body-parser');
 let app = express();
 
 //load route files
+let user_routes = require('./routes/user');
 
 //middlewares
 app.use(bodyparser.urlencoded({extended:false}));
@@ -16,6 +17,7 @@ app.use(bodyparser.json());
 //cors
 
 //rewrite routes
+app.use('/api', user_routes);
 
 //routes test
 app.get('/test', (req, res) => {

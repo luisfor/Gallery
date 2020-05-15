@@ -7,7 +7,7 @@ let UserController = require('../controllers/user');
 
 let router = express.Router();
 
-
-
+//user path
+router.post('/register', UserController.save);
 
 module.exports = router;

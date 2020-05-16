@@ -73,6 +73,21 @@ let controller = {
             });
         }
 
+    },
+    login: function(req, res) {
+        //collect the request parameters
+        
+        //search registered user with email
+
+        //if i find it
+
+        //check the password that matches the email and password
+
+        //Yeah that's right
+
+        //generate jwt token and return it
+
+        //return the data
     }
 };
 module.exports = controller;

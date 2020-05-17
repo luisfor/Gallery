@@ -25,6 +25,8 @@ let controller = {
             user.surname = params.surname;
             user.email = params.email;
             user.image = null;
+            user.role = 'Role_USER';
+            user.state = 'Activo';
 
             //check if the user exists
             User.findOne({ email: user.email }, (err, issetUser) => {

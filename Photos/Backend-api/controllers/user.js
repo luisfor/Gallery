@@ -283,7 +283,7 @@ let controller = {
         //get the name and the file extension to upload
         //full file path
         let file_path = req.files.imgAvatar.path;
-       
+
         //separate each part of the routes with the split method of javascript in windows
         let file_split = file_path.split('\\');
 
@@ -310,7 +310,7 @@ let controller = {
             let userId = req.user.sub;
 
             //search and update bd document
-            User.findByIdAndUpdate({_id: userId}, {image: file_name}, {new: true}, (err, userUpdated) => {
+            User.findByIdAndUpdate({ _id: userId }, { image: file_name }, { new: true }, (err, userUpdated) => {
                 if (err || !userUpdated) {
                     return res.status(500).send({
                         status: 'error',
@@ -327,18 +327,35 @@ let controller = {
 
     avatar: function (req, res) {
         let fileName = req.params.fileName;
-        let pathFile = './uploads/users/'+fileName;
+        let pathFile = './uploads/users/' + fileName;
 
         fs.exists(pathFile, (exists) => {
             if (exists) {
                 return res.sendFile(path.resolve(pathFile));
-            }else{
+            } else {
                 return res.status(404).send({
                     message: 'Image does not exist'
                 });
             }
         });
-    }
-    
+    },
+
+    users: function (req, res) {
+        User.find().exec((err, users) => {
+            if (err || !users) {
+                return res.status(404).send({
+                    status: 'error',
+                    message: 'There are no users to show'
+                });
+            }
+            return res.status(200).send({
+                status: 'success',
+                users
+            });
+        });
+    },
+
+   
+
 };
 module.exports = controller;

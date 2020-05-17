@@ -8,15 +8,22 @@ let jwt = require('../services/jwt');
 let controller = {
     save: function (req, res) {
 
+        let validate_name, validate_surname, validate_email, validate_password;
+
         //collect request parameters
         let params = req.body;
 
         //validate data
-        let validate_name = !validator.isEmpty(params.name);
-        let validate_surname = !validator.isEmpty(params.surname);
-        let validate_email = !validator.isEmpty(params.email) && validator.isEmail(params.email);
-        let validate_password = !validator.isEmpty(params.password);
-
+        try {
+            validate_name = !validator.isEmpty(params.name);
+            validate_surname = !validator.isEmpty(params.surname);
+            validate_email = !validator.isEmpty(params.email) && validator.isEmail(params.email);
+            validate_password = !validator.isEmpty(params.password);
+        } catch (err) {
+            return res.status(400).send({
+                message: 'incomplete data'
+            });
+        }
         if (validate_name && validate_surname && validate_email && validate_password) {
             //create user object
             let user = new User();
@@ -27,13 +34,13 @@ let controller = {
             user.email = params.email;
             user.image = null;
             user.role = 'Role_USER';
-            user.state = 'Activo';
+            user.state = true;
 
             //check if the user exists
             User.findOne({ email: user.email }, (err, issetUser) => {
                 if (err) {
                     return res.status(500).send({
-                        message: "error when testing email duplication"
+                        message: 'error when testing email duplication'
                     });
                 }
                 if (!issetUser) {
@@ -47,12 +54,12 @@ let controller = {
                         user.save((err, userStored) => {
                             if (err) {
                                 return res.status(500).send({
-                                    message: "error saving data"
+                                    message: 'error saving data'
                                 });
                             }
                             if (!userStored) {
                                 return res.status(400).send({
-                                    message: "user could not be saved"
+                                    message: 'user could not be saved'
                                 });
                             }
                             //return answer
@@ -65,29 +72,37 @@ let controller = {
 
                 } else {
                     return res.status(500).send({
-                        message: "this email is registered"
+                        message: 'this email is registered'
                     });
                 }
             });
 
         } else {
             return res.status(400).send({
-                message: "incorrect validation, please try again"
+                message: 'incorrect validation, please try again'
             });
         }
 
     },
     login: function (req, res) {
+        //declaration of variables
+        let validate_email, validate_password;
+
         //collect the request parameters
         let params = req.body;
 
         //validate data
-        let validate_email = !validator.isEmpty(params.email) && validator.isEmail(params.email);
-        let validate_password = !validator.isEmpty(params.password);
-
+        try {
+            validate_email = !validator.isEmpty(params.email) && validator.isEmail(params.email);
+            validate_password = !validator.isEmpty(params.password);
+        } catch (err) {
+            return res.status(400).send({
+                message: 'incomplete data'
+            });
+        }
         if (!validate_email || !validate_password) {
             return res.status(401).send({
-                message: "incorrect data"
+                message: 'incorrect data'
             });
         }
 
@@ -96,13 +111,13 @@ let controller = {
 
             if (err) {
                 return res.status(500).send({
-                    message: "error identifying"
+                    message: 'error identifying'
                 });
             }
 
             if (!user) {
                 return res.status(404).send({
-                    message: "Username does not exist"
+                    message: 'Username does not exist'
                 });
             }
 
@@ -125,18 +140,113 @@ let controller = {
 
                         //return the data
                         return res.status(200).send({
-                            message: "success",
+                            message: 'success',
                             user
                         });
                     }
 
                 } else {
                     return res.status(404).send({
-                        message: "credentials are not correct"
+                        message: 'credentials are not correct'
                     });
                 }
             });
         });
+    },
+
+    update: function (req, res) {
+
+        //collect the request parameters
+        let params = req.body;
+
+        //validate data
+        try {
+            let validate_name = !validator.isEmpty(params.name);
+            let validate_surname = !validator.isEmpty(params.surname);
+            let validate_email = !validator.isEmpty(params.email) && validator.isEmail(params.email);
+        } catch (error) {
+            return res.status(400).send({
+                message: 'incomplete data',
+                params
+            });
+        }
+        //remove necessary properties
+        delete params.password;
+
+        //variable with the user id
+        let userId = req.user.sub;
+
+        //check if the email is unique
+        if (req.user.email != params.email) {
+            User.findOne({ email: params.email.toLowerCase() }, (err, user) => {
+                if (err) {
+                    return res.status(500).send({
+                        message: 'error updating'
+                    });
+                }
+                if (user && user.email == params.email) {
+                    return res.status(200).send({
+                        message: 'the email is registered to another user'
+                    });
+                }
+                if (validate_email && validate_name && validate_surname) {
+
+                    User.findOneAndUpdate({ _id: userId }, params, { new: true }, (err, userUpdated) => {
+                        if (err) {
+                            return res.status(500).send({
+                                status: 'error',
+                                message: 'error when updating user'
+                            });
+                        }
+
+                        if (!userUpdated) {
+                            return res.status(500).send({
+                                status: 'error',
+                                message: 'not updated'
+                            });
+                        }
+                        //devolver respuesta
+                        return res.status(200).send({
+                            status: 'success',
+                            user: userUpdated
+                        });
+                    });
+                } else {
+                    return res.status(500).send({
+                        status: 'error',
+                        message: 'Error al actualizar usuario'
+                    });
+                }
+            });
+        } else {
+
+            //search and update documents
+            User.findOneAndUpdate({ _id: userId }, params, { new: true }, (err, userUpdated) => {
+
+                if (err) {
+                    //return the data
+                    return res.status(500).send({
+                        status: 'error',
+                        message: 'error updating user'
+                    });
+                }
+
+                if (!userUpdated) {
+                    //return the data
+                    return res.status(500).send({
+                        status: 'error',
+                        message: 'no user has been updated'
+                    });
+                }
+
+                //return the data
+                return res.status(200).send({
+                    status: 'success',
+                    user: userUpdated
+                });
+            });
+        }
+
     }
 };
 module.exports = controller;

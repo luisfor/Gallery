@@ -22,7 +22,7 @@ app.use('/api', user_routes);
 //routes test
 app.get('/test', (req, res) => {
     return res.status(200).send({
-        message: "Success"
+        message: 'Success'
     });
 });
 

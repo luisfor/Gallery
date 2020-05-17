@@ -84,6 +84,7 @@ let controller = {
         }
 
     },
+
     login: function (req, res) {
         //declaration of variables
         let validate_email, validate_password;
@@ -247,6 +248,69 @@ let controller = {
             });
         }
 
+    },
+
+    uploadAvatar: function (req, res) {
+
+
+        //collect the request file
+        let file_name = 'avatar not uploaded';
+
+        if (!req.files) {
+            //return the data
+            return res.status(404).send({
+                status: 'error',
+                user: file_name
+            });
+
+        }
+
+
+        //get the name and the file extension to upload
+        //full file path
+        let file_path = req.files.imgAvatar.path;
+        console.log(file_path);
+        
+
+        //separate each part of the routes with the split method of javascript in windows
+        let file_split = file_path.split('\\');
+
+        //separate each part of the routes with the split method of javascript on mac or linux
+        //let file_split = file_path.split('/');
+
+        //get the file name
+        file_name = file_split[2];
+
+        //file extension
+        let ext_split = file_name.split('\.');
+        let file_ext = ext_split[1];
+
+        //check image only extension and if it is not valid delete the uploaded file
+        if (file_ext != 'png' && file_ext != 'jpg' && file_ext != 'jpeg' && file_ext != 'gif' && file_ext != 'ico' && file_ext != 'PNG' && file_ext != 'JPG' && file_ext != 'JPEG' && file_ext != 'GIF' && file_ext != 'ICO') {
+            fs.unlink(file_path, (err) => {
+                return res.status(500).send({
+                    status: 'error',
+                    message: 'the file extension is not valid'
+                });
+            });
+        } else {
+            //get the id of the identified user
+            let userId = req.user.sub;
+
+            //search and update bd document
+            User.findByIdAndUpdate({_id: userId}, {image: file_name}, {new: true}, (err, userUpdated) => {
+                if (err || !userUpdated) {
+                    return res.status(500).send({
+                        status: 'error',
+                        message: 'error saving image'
+                    });
+                }
+                return res.status(200).send({
+                    status: 'success',
+                    user: userUpdated
+                });
+            });
+        }
     }
 };
 module.exports = controller;

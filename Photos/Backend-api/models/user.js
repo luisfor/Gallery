@@ -10,6 +10,8 @@ let UserSchema = Schema({
     surname: String,
     email: String,
     password: String,
+    image: String,
+    role: String,
     state: String,
     date: { type: Date, default: Date.now }
 });

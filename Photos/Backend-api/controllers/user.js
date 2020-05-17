@@ -265,13 +265,10 @@ let controller = {
 
         }
 
-
         //get the name and the file extension to upload
         //full file path
         let file_path = req.files.imgAvatar.path;
-        console.log(file_path);
-        
-
+       
         //separate each part of the routes with the split method of javascript in windows
         let file_split = file_path.split('\\');
 

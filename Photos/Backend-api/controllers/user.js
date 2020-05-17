@@ -3,6 +3,7 @@
 let validator = require('validator');
 let bcrypt = require('bcrypt-nodejs');
 let User = require('../models/user');
+let jwt = require('../services/jwt');
 
 let controller = {
     save: function (req, res) {
@@ -113,16 +114,23 @@ let controller = {
                 if (check) {
 
                     //generate jwt token and return it
+                    if (params.gettoken) {
+                        //return the data
+                        return res.status(200).send({
+                            token: jwt.createToken(user)
+                        });
+                    } else {
+                        //clear object password
+                        user.password = undefined;
 
-                    //clear object password
-                    user.password = undefined;
+                        //return the data
+                        return res.status(200).send({
+                            message: "success",
+                            user
+                        });
+                    }
 
-                    //return the data
-                    return res.status(200).send({
-                        message: "success",
-                        user
-                    });
-                }else{
+                } else {
                     return res.status(404).send({
                         message: "credentials are not correct"
                     });

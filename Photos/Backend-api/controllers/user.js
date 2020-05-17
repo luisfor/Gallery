@@ -1,9 +1,24 @@
 'user strinct'
 
+//validator method
 let validator = require('validator');
+
+//encrypt password
 let bcrypt = require('bcrypt-nodejs');
+
+//loading the users model
 let User = require('../models/user');
+
+//internal nodejs library to work with the file system
+let fs = require('fs');
+
+//loading the token
 let jwt = require('../services/jwt');
+
+//nodejs library to work folder paths
+let path = require('path');
+
+
 
 let controller = {
     save: function (req, res) {
@@ -308,6 +323,22 @@ let controller = {
                 });
             });
         }
+    },
+
+    avatar: function (req, res) {
+        let fileName = req.params.fileName;
+        let pathFile = './uploads/users/'+fileName;
+
+        fs.exists(pathFile, (exists) => {
+            if (exists) {
+                return res.sendFile(path.resolve(pathFile));
+            }else{
+                return res.status(404).send({
+                    message: 'Image does not exist'
+                });
+            }
+        });
     }
+    
 };
 module.exports = controller;

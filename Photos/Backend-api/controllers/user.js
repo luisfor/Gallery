@@ -355,7 +355,23 @@ let controller = {
         });
     },
 
-   
+    user: function (req, res) {
+        let userId = req.params.userid;
+
+        User.findById(userId).exec((err, user) => {
+            if (err || !user) {
+                return res.status(404).send({
+                    status: 'error',
+                    message: 'User does not exist'
+                });
+            }
+
+            return res.status(200).send({
+                status: 'success',
+                user
+            });
+        });
+    }
 
 };
 module.exports = controller;

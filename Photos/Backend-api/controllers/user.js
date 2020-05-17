@@ -52,7 +52,7 @@ let controller = {
                                     message: "user could not be saved"
                                 });
                             }
-                              //return answer
+                            //return answer
                             return res.status(200).send({
                                 status: 'success',
                                 user: userStored
@@ -74,20 +74,59 @@ let controller = {
         }
 
     },
-    login: function(req, res) {
+    login: function (req, res) {
         //collect the request parameters
-        
+        let params = req.body;
+
+        //validate data
+        let validate_email = !validator.isEmpty(params.email) && validator.isEmail(params.email);
+        let validate_password = !validator.isEmpty(params.password);
+
+        if (!validate_email || !validate_password) {
+            return res.status(401).send({
+                message: "incorrect data"
+            });
+        }
+
         //search registered user with email
+        User.findOne({ email: params.email.toLowerCase() }, (err, user) => {
 
-        //if i find it
+            if (err) {
+                return res.status(500).send({
+                    message: "error identifying"
+                });
+            }
 
-        //check the password that matches the email and password
+            if (!user) {
+                return res.status(404).send({
+                    message: "Username does not exist"
+                });
+            }
 
-        //Yeah that's right
+            //if you find it
+            //check the password that matches the email and password
+            bcrypt.compare(params.password, user.password, (err, check) => {
 
-        //generate jwt token and return it
+                //Yeah that's right
+                if (check) {
 
-        //return the data
+                    //generate jwt token and return it
+
+                    //clear object password
+                    user.password = undefined;
+
+                    //return the data
+                    return res.status(200).send({
+                        message: "success",
+                        user
+                    });
+                }else{
+                    return res.status(404).send({
+                        message: "credentials are not correct"
+                    });
+                }
+            });
+        });
     }
 };
 module.exports = controller;

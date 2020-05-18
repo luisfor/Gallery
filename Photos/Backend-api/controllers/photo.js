@@ -186,25 +186,32 @@ let controller = {
 
         //search by photo id
         Photo.findById(photoId)
-        .populate('user')
-        .exec((err, photo) => {
-            if (err) {
-                return res.status(500).send({
-                    status: 'error',
-                    message: 'error in the request'
+            .populate('user')
+            .exec((err, photo) => {
+                if (err) {
+                    return res.status(500).send({
+                        status: 'error',
+                        message: 'error in the request'
+                    });
+                }
+                if (!photo) {
+                    return res.status(404).send({
+                        status: 'error',
+                        message: 'No photos to show'
+                    });
+                }
+                //return results
+                return res.status(200).send({
+                    status: 'success',
+                    photo
                 });
-            }
-            if (!photo) {
-                return res.status(404).send({
-                    status: 'error',
-                    message: 'No photos to show'
-                });
-            }
-            //return results
-            return res.status(200).send({
-                status: 'success',
-                photo
             });
+    },
+
+    update: function (req, res) {
+        //return results
+        return res.status(200).send({
+            status: 'success'
         });
     }
 

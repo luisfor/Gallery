@@ -17,6 +17,7 @@ router.post('/upload-photo', md_auth.authenticated, md_upload, PhotoController.s
 router.get('/photos/:page?', PhotoController.getPhotos);
 router.get('/user-photos/:user', PhotoController.getPhotosByUser);
 router.get('/photo/:id', PhotoController.getPhoto);
+router.put('/photo/:id', md_auth.authenticated, PhotoController.update);
 
 
 module.exports = router;

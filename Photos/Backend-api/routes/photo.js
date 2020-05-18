@@ -13,7 +13,7 @@ let multiparty = require('connect-multiparty');
 let md_upload = multiparty({ uploadDir: './uploads/photos'});
 
 //photo path
-router.post('/photo', md_auth.authenticated, md_upload, PhotoController.save);
+router.post('/upload-photo', md_auth.authenticated, md_upload, PhotoController.save);
 
 
 module.exports = router;

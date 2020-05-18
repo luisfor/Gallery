@@ -103,7 +103,7 @@ let controller = {
 
     },
 
-    getPhoto: function (req, res) {
+    getPhotos: function (req, res) {
 
         //pick up current page
         let page;
@@ -177,6 +177,35 @@ let controller = {
                 });
             });
 
+    },
+
+    getPhoto: function (req, res) {
+
+        //get the id of the photo that comes from the url
+        let photoId = req.params.id;
+
+        //search by photo id
+        Photo.findById(photoId)
+        .populate('user')
+        .exec((err, photo) => {
+            if (err) {
+                return res.status(500).send({
+                    status: 'error',
+                    message: 'error in the request'
+                });
+            }
+            if (!photo) {
+                return res.status(404).send({
+                    status: 'error',
+                    message: 'No photos to show'
+                });
+            }
+            //return results
+            return res.status(200).send({
+                status: 'success',
+                photo
+            });
+        });
     }
 
 };

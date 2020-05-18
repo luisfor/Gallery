@@ -123,13 +123,13 @@ let controller = {
 
         //search paged
         Photo.paginate({}, options, (err, photo) => {
-            if(err){
+            if (err) {
                 return res.status(500).send({
                     status: 'error',
                     message: 'error when querying'
                 });
             }
-            if(!photo){
+            if (!photo) {
                 return res.status(404).send({
                     status: 'error',
                     message: 'there are no pictures'
@@ -144,6 +144,38 @@ let controller = {
                 totalPages: photo.totalPages
             });
         });
+
+    },
+
+    getPhotosByUser: function (req, res) {
+
+        //get the user id from the url
+        let userId = req.params.user;
+
+        //search the photos of the user by id
+        Photo.find({
+            user: userId
+        })
+            .sort([['date', 'descending']])
+            .exec((err, photo) => {
+                if (err) {
+                    return res.status(500).send({
+                        status: 'error',
+                        message: 'error in the request'
+                    });
+                }
+                if (!photo) {
+                    return res.status(404).send({
+                        status: 'error',
+                        message: 'No photos to show'
+                    });
+                }
+                //return results
+                return res.status(200).send({
+                    status: 'success',
+                    photo
+                });
+            });
 
     }
 

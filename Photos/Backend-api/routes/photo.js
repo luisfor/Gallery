@@ -15,6 +15,7 @@ let md_upload = multiparty({ uploadDir: './uploads/photos'});
 //photo path
 router.post('/upload-photo', md_auth.authenticated, md_upload, PhotoController.save);
 router.get('/photos/:page?', PhotoController.getPhoto);
+router.get('/user-photos/:user', PhotoController.getPhotosByUser);
 
 
 module.exports = router;

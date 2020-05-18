@@ -101,6 +101,10 @@ let controller = {
         }
 
 
+    },
+
+    getPhoto: function(req, res) {
+        
     }
 
 };

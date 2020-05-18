@@ -103,8 +103,48 @@ let controller = {
 
     },
 
-    getPhoto: function(req, res) {
-        
+    getPhoto: function (req, res) {
+
+        //pick up current page
+        let page;
+        if (!req.params.page || req.params.page == null || req.params.page == undefined || req.params.page == 0 || req.params.page == "0") {
+            page = 1
+        } else {
+            page = parseInt(req.params.page);
+        }
+
+        //indicate paging options
+        let options = {
+            sort: { date: -1 },
+            populate: 'user',
+            limit: 5,
+            page: page
+        };
+
+        //search paged
+        Photo.paginate({}, options, (err, photo) => {
+            if(err){
+                return res.status(500).send({
+                    status: 'error',
+                    message: 'error when querying'
+                });
+            }
+            if(!photo){
+                return res.status(404).send({
+                    status: 'error',
+                    message: 'there are no pictures'
+                });
+            }
+
+            //return results(photos, total photos, total pages)
+            return res.status(200).send({
+                status: 'success',
+                photo: photo.docs,
+                toltalDocs: photo.totalDocs,
+                totalPages: photo.totalPages
+            });
+        });
+
     }
 
 };

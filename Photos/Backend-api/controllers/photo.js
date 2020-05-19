@@ -242,6 +242,39 @@ let controller = {
         return res.status(200).send({
             status: 'success'
         });
+    },
+
+    delete: function (req, res) {
+
+        //get the url id
+        let photoId = req.params.id;
+
+        //search the photo in the bd to delete it
+        Photo.findOneAndDelete({ _id: photoId, user: req.user.sub }, (err, photoRemoved) => {
+            
+            if (err) {
+                return res.status(500).send({
+                    status: 'error',
+                    message: 'error in the request'
+                });
+            }
+            if (!photoRemoved) {
+                return res.status(404).send({
+                    status: 'error',
+                    message: 'the photo has not been deleted'
+                });
+            }
+            if (photoRemoved) {
+                let fileName = photoRemoved.image;
+                let pathFile = './uploads/photos/'+fileName;
+                fs.unlinkSync(pathFile);
+            }
+            //return an answer
+            return res.status(200).send({
+                message: 'success',
+                photo: photoRemoved
+            });
+        });
     }
 
 };

@@ -18,6 +18,7 @@ router.get('/photos/:page?', PhotoController.getPhotos);
 router.get('/user-photos/:user', PhotoController.getPhotosByUser);
 router.get('/photo/:id', PhotoController.getPhoto);
 router.put('/photo/:id', md_auth.authenticated, PhotoController.update);
+router.delete('/photo/:id', md_auth.authenticated, PhotoController.delete);
 
 
 module.exports = router;

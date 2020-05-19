@@ -209,6 +209,35 @@ let controller = {
     },
 
     update: function (req, res) {
+
+        let validate_name;
+
+        //collect the id of the current photo
+        let photoId = req.params.id;
+
+        //collect the data that comes from the post
+        let params = req.body;
+
+
+        //validate the data
+        try {
+            validate_name = !validator.isEmpty(params.name);
+        } catch (err) {
+            //return answer
+            res.status(404).send({
+                message: 'missing data to send'
+            });
+        }
+
+
+        //make a json with the modified data
+
+        let update = {
+            name: params.name
+        };
+
+        //search and update the photo by id and by user id
+
         //return results
         return res.status(200).send({
             status: 'success'

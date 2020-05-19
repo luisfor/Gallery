@@ -251,7 +251,7 @@ let controller = {
 
         //search the photo in the bd to delete it
         Photo.findOneAndDelete({ _id: photoId, user: req.user.sub }, (err, photoRemoved) => {
-            
+
             if (err) {
                 return res.status(500).send({
                     status: 'error',
@@ -266,7 +266,7 @@ let controller = {
             }
             if (photoRemoved) {
                 let fileName = photoRemoved.image;
-                let pathFile = './uploads/photos/'+fileName;
+                let pathFile = './uploads/photos/' + fileName;
                 fs.unlinkSync(pathFile);
             }
             //return an answer
@@ -275,6 +275,70 @@ let controller = {
                 photo: photoRemoved
             });
         });
+    },
+
+    search: function (req, res) {
+
+        //get the string sent by the url
+        let searchString = req.params.search;
+        let fecha = Date.parse(searchString);
+
+        if (!isNaN(fecha) && typeof (fecha) == 'number') {
+            //search the database by date 
+            Photo.find({"date": {$gte: new Date(fecha)}})
+                .exec((err, photo) => {
+                    if (err) {
+                        //console.log(err);
+
+                        return res.status(500).send({
+                            status: 'error',
+                            message: 'error in the request'
+                        });
+                    }
+                    if (!photo) {
+                        return res.status(404).send({
+                            status: 'error',
+                            message: 'There are no photos that match the search'
+                        });
+                    }
+                    //return an answer
+                    return res.status(200).send({
+                        message: 'success',
+                        photo
+                    });
+                });
+
+        }
+
+        if (isNaN(fecha)) {
+            //search the database by string 
+            Photo.find({
+                "$or":[
+                    {"name": {"$regex": searchString, "$options": "i"}}
+                ]
+            })
+                .exec((err, photo) => {
+                    if (err) {
+                        //console.log(err);
+
+                        return res.status(500).send({
+                            status: 'error',
+                            message: 'error in the request'
+                        });
+                    }
+                    if (!photo) {
+                        return res.status(404).send({
+                            status: 'error',
+                            message: 'There are no photos that match the search'
+                        });
+                    }
+                    //return an answer
+                    return res.status(200).send({
+                        message: 'success',
+                        photo
+                    });
+                });
+        }
     }
 
 };

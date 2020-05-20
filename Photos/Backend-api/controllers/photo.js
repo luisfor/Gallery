@@ -288,7 +288,6 @@ let controller = {
             Photo.find({"date": {$gte: new Date(fecha)}})
                 .exec((err, photo) => {
                     if (err) {
-                        //console.log(err);
 
                         return res.status(500).send({
                             status: 'error',
@@ -319,7 +318,6 @@ let controller = {
             })
                 .exec((err, photo) => {
                     if (err) {
-                        //console.log(err);
 
                         return res.status(500).send({
                             status: 'error',

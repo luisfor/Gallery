@@ -106,8 +106,6 @@ let controller = {
     getGroupPhotoById: function (req, res) {
         //get the id of the groupPhoto that comes from the url
         let albumId = req.params.id;
-        console.log(albumId);
-
 
         //search by Album id
         GroupPhoto.find({ album: albumId })

@@ -178,8 +178,6 @@ let controller = {
     getAlbumsById: function (req, res) {
         //get the id of the album that comes from the url
         let albumId = req.params.id;
-        console.log(albumId);
-
 
         //search by album id
         Album.findById(albumId)
@@ -242,7 +240,6 @@ let controller = {
              Album.find({"date": {$gte: new Date(fecha)}})
                  .exec((err, album) => {
                      if (err) {
-                         //console.log(err);
  
                          return res.status(500).send({
                              status: 'error',
@@ -273,7 +270,6 @@ let controller = {
              })
                  .exec((err, album) => {
                      if (err) {
-                         //console.log(err);
  
                          return res.status(500).send({
                              status: 'error',

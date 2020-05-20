@@ -102,6 +102,52 @@ let controller = {
 
     },
 
+    getAlbums: function (req, res) {
+        //pick up current page
+        let page;
+        if (!req.params.page || req.params.page == null || req.params.page == undefined || req.params.page == 0 || req.params.page == "0") {
+            page = 1
+        } else {
+            page = parseInt(req.params.page);
+        }
+
+        //indicate paging options
+        let options = {
+            sort: { date: -1 },
+            populate: 'user',
+            limit: 5,
+            page: page
+        };
+
+        //search paged
+        Album.paginate({}, options, (err, album) => {
+            if (err) {
+                return res.status(500).send({
+                    status: 'error',
+                    message: 'error when querying'
+                });
+            }
+            if (!album) {
+                return res.status(404).send({
+                    status: 'error',
+                    message: 'there are no album'
+                });
+            }
+
+            //return results(album, total albums, total pages)
+            return res.status(200).send({
+                status: 'success',
+                album: album.docs,
+                toltalDocs: album.totalDocs,
+                totalPages: album.totalPages
+            });
+        });
+
+    },
+
+  
+
+
 
 };
 

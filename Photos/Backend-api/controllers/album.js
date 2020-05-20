@@ -233,10 +233,68 @@ let controller = {
     },
 
     searchAlbums: function (req, res) {
-        return res.status(200).send({
-            message: 'success'
-        });
-    }
+         //get the string sent by the url
+         let searchString = req.params.search;
+         let fecha = Date.parse(searchString);
+ 
+         if (!isNaN(fecha) && typeof (fecha) == 'number') {
+             //search the database by date 
+             Album.find({"date": {$gte: new Date(fecha)}})
+                 .exec((err, album) => {
+                     if (err) {
+                         //console.log(err);
+ 
+                         return res.status(500).send({
+                             status: 'error',
+                             message: 'error in the request'
+                         });
+                     }
+                     if (!album) {
+                         return res.status(404).send({
+                             status: 'error',
+                             message: 'There are no albums that match the search'
+                         });
+                     }
+                     //return an answer
+                     return res.status(200).send({
+                         message: 'success',
+                         album
+                     });
+                 });
+ 
+         }
+ 
+         if (isNaN(fecha)) {
+             //search the database by string 
+             Album.find({
+                 "$or":[
+                     {"name": {"$regex": searchString, "$options": "i"}}
+                 ]
+             })
+                 .exec((err, album) => {
+                     if (err) {
+                         //console.log(err);
+ 
+                         return res.status(500).send({
+                             status: 'error',
+                             message: 'error in the request'
+                         });
+                     }
+                     if (!album) {
+                         return res.status(404).send({
+                             status: 'error',
+                             message: 'There are no albums that match the search'
+                         });
+                     }
+                     //return an answer
+                     return res.status(200).send({
+                         message: 'success',
+                         album
+                     });
+                 });
+         }
+     }
+ 
 
 };
 

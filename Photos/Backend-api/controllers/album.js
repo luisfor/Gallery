@@ -205,7 +205,17 @@ let controller = {
             });
     },
 
+    deleteAlbum: function (req, res) {
+        return res.status(200).send({
+            message: 'success'
+        });
+    },
 
+    searchAlbums: function (req, res) {
+        return res.status(200).send({
+            message: 'success'
+        });
+    }
 
 };
 

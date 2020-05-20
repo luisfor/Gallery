@@ -52,6 +52,55 @@ let controller = {
         }
     },
 
+    update: function (req, res) {
+        //collect the request parameters
+        let params = req.body;
+
+        let validate_name;
+
+        //validate data
+        try {
+            validate_name = !validator.isEmpty(params.name);
+        } catch (error) {
+            return res.status(400).send({
+                message: 'incomplete data',
+                params
+            });
+        }
+
+        //variable with the album id
+        let albumId = req.params.id;
+
+        if (validate_name) {
+            //search and update documents
+            Album.findOneAndUpdate({ _id: albumId }, params, { new: true }, (err, albumUpdated) => {
+
+                if (err) {
+                    //return the data
+                    return res.status(500).send({
+                        status: 'error',
+                        message: 'error updating album'
+                    });
+                }
+
+                if (!albumUpdated) {
+                    //return the data
+                    return res.status(500).send({
+                        status: 'error',
+                        message: 'no album has been updated'
+                    });
+                }
+
+                //return the data
+                return res.status(200).send({
+                    status: 'success',
+                    album: albumUpdated
+                });
+            });
+        }
+
+
+    },
 
 
 };

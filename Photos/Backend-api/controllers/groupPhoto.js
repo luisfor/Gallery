@@ -43,7 +43,6 @@ let controller = {
                         message: 'error in the request'
                     });
                 }
-                console.log(groupPhotoId);
 
                 if (groupPhotoId.length >= 1) {
                     return res.status(404).send({
@@ -78,17 +77,29 @@ let controller = {
 
     deleteGroupPhoto: function (req, res) {
 
-        
-        //return answer
-        res.status(200).send({
-            message: 'delete'
-        });
-    },
+        //get the url id
+        let groupPhotoId = req.params.id;
 
-    searchGroupPhoto: function (req, res) {
-        //return answer
-        res.status(200).send({
-            message: 'search'
+        //search the groupPhoto in the bd to delete it
+        GroupPhoto.findOneAndDelete({ _id: groupPhotoId, user: req.user.sub }, (err, groupPhotoRemoved) => {
+
+            if (err) {
+                return res.status(500).send({
+                    status: 'error',
+                    message: 'error in the request'
+                });
+            }
+            if (!groupPhotoRemoved) {
+                return res.status(404).send({
+                    status: 'error',
+                    message: 'the groupPhoto has not been deleted'
+                });
+            }
+            //return an answer
+            return res.status(200).send({
+                message: 'success',
+                album: groupPhotoRemoved
+            });
         });
     }
 

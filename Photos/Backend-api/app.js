@@ -11,6 +11,7 @@ let app = express();
 let user_routes = require('./routes/user');
 let photo_routes = require('./routes/photo');
 let album_routes = require('./routes/album');
+let groupPhoto_routes =require('./routes/groupPhoto');
 
 //middlewares
 app.use(bodyparser.urlencoded({extended:false}));
@@ -22,13 +23,14 @@ app.use(bodyparser.json());
 app.use('/api', user_routes);
 app.use('/api', photo_routes);
 app.use('/api', album_routes);
+app.use('/api', groupPhoto_routes);
 
 //routes test
-app.get('/test', (req, res) => {
+/*app.get('/test', (req, res) => {
     return res.status(200).send({
         message: 'Success'
     });
-});
+});*/
 
 //export module
 module.exports = app;

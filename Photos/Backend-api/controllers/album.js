@@ -206,9 +206,30 @@ let controller = {
     },
 
     deleteAlbum: function (req, res) {
-        return res.status(200).send({
-            message: 'success'
-        });
+         //get the url id
+         let albumId = req.params.id;
+
+         //search the album in the bd to delete it
+         Album.findOneAndDelete({ _id: albumId, user: req.user.sub }, (err, albumRemoved) => {
+ 
+             if (err) {
+                 return res.status(500).send({
+                     status: 'error',
+                     message: 'error in the request'
+                 });
+             }
+             if (!albumRemoved) {
+                 return res.status(404).send({
+                     status: 'error',
+                     message: 'the album has not been deleted'
+                 });
+             }
+             //return an answer
+             return res.status(200).send({
+                 message: 'success',
+                 album: albumRemoved
+             });
+         });
     },
 
     searchAlbums: function (req, res) {

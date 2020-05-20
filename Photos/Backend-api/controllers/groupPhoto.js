@@ -101,6 +101,37 @@ let controller = {
                 album: groupPhotoRemoved
             });
         });
+    },
+
+    getGroupPhotoById: function (req, res) {
+        //get the id of the groupPhoto that comes from the url
+        let albumId = req.params.id;
+        console.log(albumId);
+
+
+        //search by Album id
+        GroupPhoto.find({ album: albumId })
+            .populate('photo')
+            .populate('user')
+            .exec((err, groupPhoto) => {
+                if (err) {
+                    return res.status(500).send({
+                        status: 'error',
+                        message: 'error in the request'
+                    });
+                }
+                if (!groupPhoto) {
+                    return res.status(404).send({
+                        status: 'error',
+                        message: 'No groupPhoto to show'
+                    });
+                }
+                //return results
+                return res.status(200).send({
+                    status: 'success',
+                    groupPhoto
+                });
+            });
     }
 
 

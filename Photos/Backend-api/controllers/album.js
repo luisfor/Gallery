@@ -145,7 +145,35 @@ let controller = {
 
     },
 
-  
+    getAlbumsByUser: function (req, res) {
+        //get the user id from the url
+        let userId = req.params.user;
+
+        //search the album of the user by id
+        Album.find({
+            user: userId
+        })
+            .sort([['date', 'descending']])
+            .exec((err, album) => {
+                if (err) {
+                    return res.status(500).send({
+                        status: 'error',
+                        message: 'error in the request'
+                    });
+                }
+                if (!album) {
+                    return res.status(404).send({
+                        status: 'error',
+                        message: 'No album to show'
+                    });
+                }
+                //return results
+                return res.status(200).send({
+                    status: 'success',
+                    album
+                });
+            });
+    },
 
 
 

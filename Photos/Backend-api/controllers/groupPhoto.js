@@ -6,13 +6,79 @@ let GroupPhoto = require('../models/groupPhoto');
 let controller = {
 
     save: function (req, res) {
-        //return answer
-        res.status(200).send({
-            message: 'save'
-        });
+
+        let validate_photo, validate_album;
+
+        //collect the parameters
+        let params = req.body;
+
+        //validate the data
+        try {
+            validate_photo = !validator.isEmpty(params.photoId);
+            validate_album = !validator.isEmpty(params.albumId);
+        } catch (err) {
+            //return answer
+            res.status(404).send({
+                message: 'missing data to send'
+            });
+        }
+
+        if (validate_album && validate_photo) {
+
+            //create object save
+            let groupPhoto = new GroupPhoto();
+
+            //assign values
+            groupPhoto.photo = params.photoId;
+            groupPhoto.album = params.albumId;
+            groupPhoto.user = req.user.sub;
+            groupPhoto.state = true;
+
+            //check that the photo is not registered in another album
+            let photoById = params.photoId;
+            GroupPhoto.find({ photo: photoById }).exec((err, groupPhotoId) => {
+                if (err) {
+                    return res.status(500).send({
+                        status: 'error',
+                        message: 'error in the request'
+                    });
+                }
+                console.log(groupPhotoId);
+
+                if (groupPhotoId.length >= 1) {
+                    return res.status(404).send({
+                        status: 'error',
+                        message: 'the photo is assigned in another album'
+                    });
+                }
+
+                //save data
+                groupPhoto.save((err, groupPhotoStore) => {
+                    if (err || !groupPhotoStore) {
+                        return res.status(404).send({
+                            status: 'error',
+                            message: 'error saving data'
+                        });
+                    }
+                    return res.status(200).send({
+                        status: 'success',
+                        groupPhoto: groupPhotoStore
+                    });
+                });
+
+            });
+        } else {
+            //return answer
+            res.status(400).send({
+                message: 'incomplete data'
+            });
+        }
+
     },
 
     deleteGroupPhoto: function (req, res) {
+
+        
         //return answer
         res.status(200).send({
             message: 'delete'

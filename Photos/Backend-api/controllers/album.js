@@ -175,6 +175,36 @@ let controller = {
             });
     },
 
+    getAlbumsById: function (req, res) {
+        //get the id of the album that comes from the url
+        let albumId = req.params.id;
+        console.log(albumId);
+
+
+        //search by album id
+        Album.findById(albumId)
+            .populate('user')
+            .exec((err, album) => {
+                if (err) {
+                    return res.status(500).send({
+                        status: 'error',
+                        message: 'error in the request'
+                    });
+                }
+                if (!album) {
+                    return res.status(404).send({
+                        status: 'error',
+                        message: 'No album to show'
+                    });
+                }
+                //return results
+                return res.status(200).send({
+                    status: 'success',
+                    album
+                });
+            });
+    },
+
 
 
 };

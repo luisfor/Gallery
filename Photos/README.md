@@ -38,6 +38,8 @@
 
 This project is carried out as a technical test, with the purpose of participating in one of the vacancies as a backend developer in the company Condorlab.
 
+This project is a backend that has the functionality of user crud, photo crud, album crud, which the registered user can upload their photos and create album to add their already uploaded photos.
+
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
@@ -118,19 +120,137 @@ upon logging in he receives a token that they must see adding a parameter called
 ``` 
 http://localhost:3000/api/update
 ```
-3. path to upload avatar
+4. path to upload avatar
 ``` 
 http://localhost:3000/api/upload-avatar
 ```
 
-4. pshow the avatar image by the name saved in the database
+5. path show the avatar image by the name saved in the database
 ``` 
-http://localhost:3000/api/avatar/:fileName
+http://localhost:3000/api/avatar/fileName
+```
+
+6. path show the users
+``` 
+http://localhost:3000/api/users
+```
+
+7. path show the user by id
+``` 
+http://localhost:3000/api/user/id
+```
+
+## Photo method
+
+1. path to register a new photo and receive the following parameters: name, imgPhoto.
+``` 
+http://localhost:3000/api/upload-photo
+```
+2. list the photos and you can receive by parameter of the url numbers of pages
+   * option 1
+``` 
+http://localhost:3000/api/photos/:page?
+```
+   * option 2
+``` 
+http://localhost:3000/api/photos/
+```
+
+3. path show the photo by userid
+``` 
+http://localhost:3000/api/user-photos/userid
+```
+
+4. path show the photo by id
+``` 
+http://localhost:3000/api/photo/id
+```
+
+5. path update the photo by id
+``` 
+http://localhost:3000/api/photo/id
+```
+6. delete photo by id
+``` 
+http://localhost:3000/api/photo/id
+```
+7. search photo by name or by date 
+  
+  * opction 1  
+``` 
+http://localhost:3000/api/search/2020-05-21
+``` 
+
+  * opction 2  
+``` 
+http://localhost:3000/api/search/name
+``` 
+
+## Album method
+
+1. path to register a new album and receive the following parameters: name.
+``` 
+http://localhost:3000/api/album
+```
+2. list the album and you can receive by parameter of the url numbers of pages
+   * option 1
+``` 
+http://localhost:3000/api/albums/:page?
+```
+   * option 2
+``` 
+http://localhost:3000/api/albums/
+```
+
+3. path show the album by userid
+``` 
+http://localhost:3000/api/user-album/userid
+```
+
+4. path show the album by id
+``` 
+http://localhost:3000/api/album/id
+```
+
+5. path update the album by id
+``` 
+http://localhost:3000/api/album/id
+```
+6. delete album by id
+``` 
+http://localhost:3000/api/album/id
+```
+7. search album by name or by date 
+  
+  * opction 1  
+``` 
+http://localhost:3000/api/album-search/2020-05-21
+``` 
+
+  * opction 2  
+``` 
+http://localhost:3000/api/album-search/name
+``` 
+
+## method to add photos to an album
+
+1. path to add a photo to an album and receive the following parameters: photoId, albumId.
+``` 
+http://localhost:3000/api/groupPhoto
+```
+2. delete photo from the album
+``` 
+http://localhost:3000/api/groupPhoto/id
+``` 
+
+3. show photos of an added to an album by the album id
+``` 
+http://localhost:3000/api/groupPhoto/id
 ```
 
 ## 🚀 Deployment <a name = "deployment"></a>
 
-Add additional notes about how to deploy this on a live system.
+to implement in heroku I leave guide [link](https://devcenter.heroku.com/articles/git) 
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 

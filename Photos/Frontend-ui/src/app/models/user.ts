@@ -8,7 +8,7 @@ export class User{
         public image: string,
         public role: string,
         public state: string,
-        public date: string,
+        public date: string
         
     ){}
 }

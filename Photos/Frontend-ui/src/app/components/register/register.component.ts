@@ -12,7 +12,7 @@ export class RegisterComponent implements OnInit {
   
 
   constructor() { 
-    this.page_title = 'Register';
+    this.page_title = 'Sing Up';
     this.user = new User('','','','','','','ROLE_USER','','');
   }
 

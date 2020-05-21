@@ -16,10 +16,7 @@
 
 ---
 
-<p align="center"> Few lines describing your project.
-
-
-</p>
+<h2 align="center"> Description of this project</h2>
 
 ## 📝 Table of Contents
 

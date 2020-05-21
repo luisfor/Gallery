@@ -1,43 +1,49 @@
+<div class="col-lg-12 mt-3 alert alert-success" *ngIf="status == 'success'">
+    Successful registration, <a [routerLink]="['/login']">Login In</a>
+</div>
+<div class="col-lg-12 mt-3 alert alert-danger" *ngIf="status == 'error'">
+    registration error
+</div>
 <div class="col-lg-12 mt-5 container" id="registration-form">
-    <div class="image"></div>   
+    <div class="image"></div>
     <div class="frm">
         <form class="col-md-12 ml-0 pl-2" #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
-             <h1>
-                 {{page_title}}
-             </h1>
-             <div class="form-group">
-                 <label for="name">Name</label>
-                 <input type="text" name="name" #name="ngModel" [(ngModel)]="user.name" required pattern="[a-zA-ZÀ-ÿ ]+"
-                     class="form-control" />
-                 <small *ngIf="!name.valid && name.touched" class="invalid-feedback d-block">
-                     Username is not valid
-                 </small>
-             </div>
-             <div class="form-group">
-                 <label for="surname">Surname</label>
-                 <input type="text" name="surname" #surname="ngModel" [(ngModel)]="user.surname" required
-                     pattern="[a-zA-ZÀ-ÿ ]+" class="form-control" />
-                 <small *ngIf="!surname.valid && surname.touched" class="invalid-feedback d-block">
-                     surnames are not valid
-                 </small>
-             </div>
-             <div class="form-group">
-                 <label for="email">Email</label>
-                 <input type="email" name="email" #email="ngModel" [(ngModel)]="user.email" required
-                     pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,4}$" class="form-control" />
-                 <small *ngIf="!email.valid && email.touched" class="invalid-feedback d-block">
-                     the mail is not valid
-                 </small>
-             </div>
-             <div class="form-group">
-                 <label for="password">Password</label>
-                 <input type="password" name="password" #password="ngModel" [(ngModel)]="user.password" required
-                     class="form-control" />
-                 <small *ngIf="!password.valid && password.touched" class="invalid-feedback d-block">
-                     Invalid password
-                 </small>
-             </div>
-             <input type="submit" value="Send" class="btn btn-success" [disabled]="registerForm.invalid">
-         </form>
+            <h1>
+                {{page_title}}
+            </h1>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" name="name" #name="ngModel" [(ngModel)]="user.name" required pattern="[a-zA-ZÀ-ÿ ]+"
+                    class="form-control" />
+                <small *ngIf="!name.valid && name.touched" class="invalid-feedback d-block">
+                    Username is not valid
+                </small>
+            </div>
+            <div class="form-group">
+                <label for="surname">Surname</label>
+                <input type="text" name="surname" #surname="ngModel" [(ngModel)]="user.surname" required
+                    pattern="[a-zA-ZÀ-ÿ ]+" class="form-control" />
+                <small *ngIf="!surname.valid && surname.touched" class="invalid-feedback d-block">
+                    surnames are not valid
+                </small>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" name="email" #email="ngModel" [(ngModel)]="user.email" required
+                    pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,4}$" class="form-control" />
+                <small *ngIf="!email.valid && email.touched" class="invalid-feedback d-block">
+                    the mail is not valid
+                </small>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" #password="ngModel" [(ngModel)]="user.password" required
+                    class="form-control" />
+                <small *ngIf="!password.valid && password.touched" class="invalid-feedback d-block">
+                    Invalid password
+                </small>
+            </div>
+            <input type="submit" value="Send" class="btn btn-success" [disabled]="registerForm.invalid">
+        </form>
     </div>
 </div>

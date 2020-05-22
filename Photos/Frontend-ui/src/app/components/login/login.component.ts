@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
               if (response.token) {
                 //saving the token in a property to later save it in the local storage
                 this.token = response.token;
+                localStorage.setItem('token', JSON.stringify(this.token));
               } else {
                 this.status = 'error';
               }

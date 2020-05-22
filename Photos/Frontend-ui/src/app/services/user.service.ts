@@ -52,4 +52,15 @@ export class UserService {
         return identity;
     }
 
+    getToken(){
+        let token = JSON.parse(localStorage.getItem('token'));
+
+        if (token && token != null && token != undefined && token != "undefined") {
+            this.token = token;
+        } else {
+            this.token = null;
+        }
+        return token;
+    }
+
 }

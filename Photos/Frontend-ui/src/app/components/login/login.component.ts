@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
 
           //saving the user in a property to later save it in the local storage
           this.identity = response.user;
+          localStorage.setItem('identity', JSON.stringify(this.identity));
 
           //get the token of the logged in user
           this._userService.signup(this.user, true).subscribe(

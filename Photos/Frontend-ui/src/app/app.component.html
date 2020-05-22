@@ -1,7 +1,7 @@
 <div class="container">
   <!-- Cabecera de la web -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light mt-4">
-    <a class="navbar-brand nav-link" [routerLink]="['/home']">GALLERY</a>
+    <a class="navbar-brand nav-link" href="#" [routerLink]="['/home']">GALLERY</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -10,9 +10,9 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" [routerLink]="['/home'] ">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="#" [routerLink]="['/home'] ">Home <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown" *ngIf="identity">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
             Photo
@@ -22,7 +22,7 @@
             <a class="dropdown-item" href="#">Add</a>
           </div>
         </li>
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown" *ngIf="identity">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
             Album
@@ -36,7 +36,7 @@
           &nbsp;
           &nbsp;
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="identity">
           <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search Photo" aria-label="Buscar">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -44,13 +44,13 @@
         </li>
       </ul>
       <ul class="navbar-nav navbar-right">
-        <li class="nav-item ">
-          <a class="nav-link" [routerLink]="['/register']">sign up</a>
+        <li class="nav-item " *ngIf="!identity">
+          <a class="nav-link" href="#" [routerLink]="['/register']">sign up</a>
         </li>
-        <li class="nav-item ">
-          <a class="nav-link" [routerLink]="['/login']">Login</a>
+        <li class="nav-item " *ngIf="!identity">
+          <a class="nav-link" href="#" [routerLink]="['/login']">Login</a>
         </li>
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown" *ngIf="identity">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
             {{identity.name}}

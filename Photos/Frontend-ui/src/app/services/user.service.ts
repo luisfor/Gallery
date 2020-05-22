@@ -5,17 +5,17 @@ import { User } from '../models/user';
 import { global } from './global';
 
 @Injectable()
-export class UserService{
+export class UserService {
     public url: string;
-    constructor( private _http: HttpClient){
+    constructor(private _http: HttpClient) {
         this.url = global.url;
     }
-    test(){
+    test() {
         return "";
     }
 
-    register(user): Observable<any>{
-        
+    register(user): Observable<any> {
+
         //convert user to json object
         let params = JSON.stringify(user);
 
@@ -23,7 +23,20 @@ export class UserService{
         let headers = new HttpHeaders().set('Content-type', 'application/json');
 
         //make ajax request
-        return this._http.post(this.url+'register', params, {headers: headers });
+        return this._http.post(this.url + 'register', params, { headers: headers });
     }
-    
+
+    signup(user, gettoken = null): Observable<any> {
+
+        //check if the token arrives
+        if (gettoken != null) {
+            user.gettoken = gettoken;
+        }
+        let params = JSON.stringify(user);
+        let headers = new HttpHeaders().set('Content-type', 'application/json');
+
+
+        return this._http.post(this.url + 'login', params, { headers: headers });
+    }
+
 }

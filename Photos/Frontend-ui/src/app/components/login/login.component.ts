@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, Params, } from '@angular/router';
 import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
 
@@ -14,7 +15,11 @@ export class LoginComponent implements OnInit {
   public status: string;
   public identity;
   public token;
-  constructor(private _userService: UserService) {
+  constructor(
+    private _userService: UserService,
+    private _router: Router,
+    private _route: ActivatedRoute
+    ) {
     this.page_title = 'Sign Up';
     this.user = new User('', '', '', '', '', '', 'ROLE_USER', '', '');
   }
@@ -38,6 +43,9 @@ export class LoginComponent implements OnInit {
                 //saving the token in a property to later save it in the local storage
                 this.token = response.token;
                 localStorage.setItem('token', JSON.stringify(this.token));
+
+                this.status = 'success';
+                this._router.navigate(['/home']);
               } else {
                 this.status = 'error';
               }
@@ -47,9 +55,6 @@ export class LoginComponent implements OnInit {
               console.log(error);
 
             });
-
-
-          this.status = 'success';
 
         } else {
           this.status = 'error';

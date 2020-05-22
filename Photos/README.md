@@ -88,7 +88,7 @@ npm start
 start the project in developer mode
 
 ``` 
-nodemon developer
+npm run developer
 ```
 
 ## 🎈 Usage <a name="usage"></a>

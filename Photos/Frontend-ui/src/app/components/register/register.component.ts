@@ -30,13 +30,14 @@ export class RegisterComponent implements OnInit {
         if (response.user && response.user._id) {
           this.status = 'success';
           form.reset();
-        }else{
+        } else {
           this.status = 'error';
         }
       },
-      error =>{
+      error => {
         console.log(error);
-        
+        //this.status = error.error.message;
+
       }
     );
 

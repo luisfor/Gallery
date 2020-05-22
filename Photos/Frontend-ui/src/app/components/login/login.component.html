@@ -1,1 +1,36 @@
-<p>login works!</p>
+<div class="col-lg-12 mt-3 alert alert-success" *ngif="status == 'Success'" >
+    Successful login 
+</div>
+<div class="col-lg-12 mt-3 alert alert-danger" *ngif="status == 'error'">
+    login error
+</div>
+<div class="col-lg-12 mt-5 container registration-form">
+    <div class="image"></div>
+
+    <div class="frm">
+
+        <form class="col-md-12 ml-0 pl-2" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+            <h1>
+                {{page_title}}
+            </h1>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" name="email" #email="ngModel" [(ngModel)]="user.email" required
+                    pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,4}$" class="form-control" />
+                <small *ngIf="!email.valid && email.touched" class="invalid-feedback d-block">
+                    the mail is not valid
+                </small>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" #password="ngModel" [(ngModel)]="user.password" required
+                    class="form-control" />
+                <small *ngIf="!password.valid && password.touched" class="invalid-feedback d-block">
+                    Invalid password
+                </small>
+            </div>
+            <input type="submit" value="Send" class="btn btn-success" [disabled]="loginForm.invalid">
+        </form>
+
+    </div>
+</div>

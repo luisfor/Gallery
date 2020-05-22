@@ -1,11 +1,11 @@
 
 #registration-form{
+	display: flex;
 	max-width: 800px;
 }
 
 #registration-form .image{
-	float:left;
-	background-image: url("desk.jpg");
+	background-image: url("img/desk.jpg");
 	height: 500px;
 	width: 50%;
 	background-size: cover;
@@ -13,8 +13,7 @@
 }
 
 #registration-form .frm{
-	float:right;
-	height: 450px;
+	height: 500;
     width: 50%;
     min-width: 250px;
     background-size: 100% 100%;

@@ -1,4 +1,5 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UserService } from './services/user.service';
 
 @Component({
@@ -7,22 +8,33 @@ import { UserService } from './services/user.service';
   styleUrls: ['./app.component.css'],
   providers: [UserService]
 })
-export class AppComponent implements OnInit, DoCheck{
+export class AppComponent implements OnInit, DoCheck {
   public title = 'Frontend-ui';
   public identity;
   public token;
 
-  constructor(private _userService: UserService){
+  constructor(
+    private _userService: UserService,
+    private _router: Router,
+    private _route: ActivatedRoute
+  ) {
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
   }
 
-  ngOnInit(){
+  ngOnInit() {
     //console.log(this.identity);
     //console.log(this.token);    
   }
-  ngDoCheck(){
+  ngDoCheck() {
     this.identity = this._userService.getIdentity();
+  }
+
+  logOut() {
+    localStorage.clear();
+    this.identity = null;
+    this.token = null;
+    this._router.navigate(['/home']);
   }
 
 }

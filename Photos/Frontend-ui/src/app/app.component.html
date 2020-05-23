@@ -58,9 +58,9 @@
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="#">User Panel</a>
             <a class="dropdown-item" href="#">My Profile</a>
-            <a class="dropdown-item" href="#">Setting</a>
+            <a class="dropdown-item" href="#" [routerLink]="['/settings']">Setting</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Sign Out</a>
+            <a class="dropdown-item" href="#" (click)="logOut()">Sign Out</a>
           </div>
         </li>
       </ul>

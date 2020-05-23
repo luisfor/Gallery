@@ -22,7 +22,7 @@ export class UserService {
         let params = JSON.stringify(user);
 
         //define the header
-        let headers = new HttpHeaders().set('Content-type', 'application/json');
+        let headers = new HttpHeaders().set(' content-type', 'application/json');
 
         //make ajax request
         return this._http.post(this.url + 'register', params, { headers: headers });
@@ -35,13 +35,13 @@ export class UserService {
             user.gettoken = gettoken;
         }
         let params = JSON.stringify(user);
-        let headers = new HttpHeaders().set('Content-type', 'application/json');
+        let headers = new HttpHeaders().set('content-type', 'application/json');
 
 
         return this._http.post(this.url + 'login', params, { headers: headers });
     }
 
-    getIdentity(){
+    getIdentity() {
         let identity = JSON.parse(localStorage.getItem('identity'));
 
         if (identity && identity != null && identity != undefined && identity != "undefined") {
@@ -52,7 +52,7 @@ export class UserService {
         return identity;
     }
 
-    getToken(){
+    getToken() {
         let token = JSON.parse(localStorage.getItem('token'));
 
         if (token && token != null && token != undefined && token != "undefined") {
@@ -61,6 +61,15 @@ export class UserService {
             this.token = null;
         }
         return token;
+    }
+
+    update(user): Observable<any> {
+
+        let params = JSON.stringify(user);
+        let headers = new HttpHeaders().set('content-type', 'application/json')
+            .set('Authorization', this.getToken());
+
+        return this._http.put(this.url + 'user/update', params, {headers: headers});
     }
 
 }

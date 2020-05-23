@@ -1,0 +1,63 @@
+
+.userUpdate{
+	display: flex;
+	max-width: 800px;
+}
+
+.userUpdate .image{
+	height: 450px;
+	width: 50%;
+	background-size: cover;
+	background-position: 25%;
+}
+
+.userUpdate .frm{
+	height: 450;
+    width: 50%;
+    min-width: 250px;
+    background-size: 100% 100%;
+}
+
+.userUpdate h1{
+	margin-top: 30px;
+	margin-bottom: 20px;
+}
+
+.userUpdate .form-control{
+	width: 90%;
+	height: auto;
+}
+
+@media screen and (max-width: 700px){
+	.userUpdate .image{
+		width: 30%;
+	    background-position: 60%;
+	}
+
+	.userUpdate .frm{
+		width: 70%;
+	}
+
+	.userUpdate .form-control{
+		width: 100%;
+	}
+}
+
+@media screen and (max-width: 500px){
+	.userUpdate .image{
+		display: none;
+	}
+
+	.userUpdate .frm{
+		width: 100%;
+	}
+
+	.userUpdate h1{
+		text-align: center;
+	}
+
+	.userUpdate .btn{
+		width: 100%;
+		margin-top: 20px;
+	}
+}

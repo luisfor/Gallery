@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { PanelRoutingModule } from './panel-routing.module';
+import { AngularFileUploaderModule } from 'angular-file-uploader';
 
 
 
@@ -27,7 +28,8 @@ import { DeleteComponent } from './components/delete/delete.component';
         CommonModule,
         FormsModule,
         HttpClientModule,
-        PanelRoutingModule
+        PanelRoutingModule,
+        AngularFileUploaderModule
     ],
     providers: []
 })

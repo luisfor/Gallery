@@ -13,68 +13,32 @@ let controller = {
 
     save: function (req, res) {
 
-        let validate_name;
-
-        //collect the parameters
+        //collect the request parameters
         let params = req.body;
 
-        //collect the request file
-        let file_name = 'avatar not uploaded';
-
-        if (!req.files) {
-            //return the data
-            return res.status(404).send({
-                status: 'error',
-                user: file_name
-            });
-
-        }
-
-        //get the name and the file extension to upload
-        //full file path
-        let file_path = req.files.imgPhoto.path;
-
-        //separate each part of the routes with the split method of javascript in windows
-        let file_split = file_path.split('\\');
-
-        //separate each part of the routes with the split method of javascript on mac or linux
-        //let file_split = file_path.split('/');
-
-        //get the file name
-        file_name = file_split[2];
-
-        //file extension
-        let ext_split = file_name.split('\.');
-        let file_ext = ext_split[1];
-
-        //check image only extension and if it is not valid delete the uploaded file
-        if (file_ext != 'png' && file_ext != 'jpg' && file_ext != 'jpeg' && file_ext != 'gif' && file_ext != 'ico' && file_ext != 'PNG' && file_ext != 'JPG' && file_ext != 'JPEG' && file_ext != 'GIF' && file_ext != 'ICO') {
-            fs.unlink(file_path, (err) => {
-                return res.status(500).send({
-                    status: 'error',
-                    message: 'the file extension is not valid'
-                });
-            });
-        } else {
+        let validate_name, validate_image;
 
             //validate the data
             try {
                 validate_name = !validator.isEmpty(params.name);
+                validate_image = !validator.isEmpty(params.image);
             } catch (err) {
+                console.log(err);
                 //return answer
                 res.status(404).send({
                     message: 'missing data to send'
                 });
+                
             }
 
-            if (validate_name) {
+            if (validate_name && validate_image) {
 
                 //create object save
                 let photo = new Photo();
 
                 //assign values
                 photo.name = params.name;
-                photo.image = file_name;
+                photo.image = params.image;
                 photo.state = true;
                 photo.user = req.user.sub;
 
@@ -98,7 +62,6 @@ let controller = {
                 });
             }
 
-        }
 
 
     },
@@ -336,6 +299,55 @@ let controller = {
                         photo
                     });
                 });
+        }
+    },
+
+    uploadPhoto: function (req, res) {
+        
+       
+        //collect the request file
+        let file_name = 'avatar not uploaded';
+
+        if (!req.files) {
+            //return the data
+            return res.status(404).send({
+                status: 'error',
+                user: file_name
+            });
+
+        }
+
+        //get the name and the file extension to upload
+        //full file path
+        let file_path = req.files.file0.path;
+
+        //separate each part of the routes with the split method of javascript in windows
+        let file_split = file_path.split('\\');
+
+        //separate each part of the routes with the split method of javascript on mac or linux
+        //let file_split = file_path.split('/');
+
+        //get the file name
+        file_name = file_split[2];
+        
+
+        //file extension
+        let ext_split = file_name.split('\.');
+        let file_ext = ext_split[1];
+
+        //check image only extension and if it is not valid delete the uploaded file
+        if (file_ext != 'png' && file_ext != 'jpg' && file_ext != 'jpeg' && file_ext != 'gif' && file_ext != 'ico' && file_ext != 'PNG' && file_ext != 'JPG' && file_ext != 'JPEG' && file_ext != 'GIF' && file_ext != 'ICO') {
+            fs.unlink(file_path, (err) => {
+                return res.status(500).send({
+                    status: 'error',
+                    message: 'the file extension is not valid'
+                });
+            });
+        }else{
+            return res.status(200).send({
+                status: 'success',
+                image: file_name
+            });
         }
     }
 

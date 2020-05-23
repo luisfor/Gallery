@@ -16,11 +16,11 @@ const panelRoutes: Routes = [
         path: 'panel',
         component: MainComponent,
         children: [
-            { path: '', component: ListComponent }
-            { path: 'add', component: AddComponent }
-            { path: 'list', component: ListComponent }
-            { path: 'delete', component: DeleteComponent }
-            { path: 'update', component: EditComponent }
+            { path: '', component: ListComponent },
+            { path: 'add', component: AddComponent },
+            { path: 'list', component: ListComponent },
+            { path: 'delete/:id', component: DeleteComponent },
+            { path: 'update/:id', component: EditComponent }
         ]
 
     }
@@ -35,4 +35,4 @@ const panelRoutes: Routes = [
     ]
 })
 
-export class PaneRoutingModule{}
+export class PanelRoutingModule{}

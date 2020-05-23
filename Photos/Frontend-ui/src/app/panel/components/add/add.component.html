@@ -1,1 +1,18 @@
-<p>add works!</p>
+<div class="col-lg-10">
+    <h3>{{page_title}}</h3>
+    <hr/>
+
+    <form #addPhoto="ngForm" (ngSubmit)="onSubmit(addPhoto)">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" name="name" #name="ngModel" [(ngModel)]="photo.name" required pattern="[a-zA-ZÀ-ÿ ]+"
+                class="form-control" />
+            <small *ngIf="!name.valid && name.touched" class="invalid-feedback d-block">
+                name is not valid
+            </small>
+        </div>
+
+        <input type="submit" value="send" class="btn btn-success" [disabled]="addPhoto.invalid" />
+        
+    </form>
+</div>

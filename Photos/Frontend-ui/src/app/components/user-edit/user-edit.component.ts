@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
+import { global } from '../../services/global';
 
 @Component({
   selector: 'app-user-edit',
@@ -15,6 +16,8 @@ export class UserEditComponent implements OnInit {
   public identity;
   public token;
   public status;
+  public afuConfig;
+  public url;
 
   constructor(
     private _router: Router,
@@ -24,12 +27,38 @@ export class UserEditComponent implements OnInit {
     this.page_title = 'user settings'
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
-    this.user =  this.identity;
+    this.user = this.identity;
+    this.url = global.url;
+
+    this.afuConfig = {
+      multiple: false,
+      formatsAllowed: ".jpg, .jpeg, .png, .git",
+      maxSize: "50",
+      uploadAPI: {
+        url: this.url + "upload-avatar",
+        headers: {
+          "Authorization": this.token
+        }
+      },
+      theme: "attachPin",
+      hideProgressBar: false,
+      hideResetBtn: true,
+      hideSelectBtn: false,
+      attachPinText: 'Upload Photo'
+    };
   }
 
-  ngOnInit(): void {
+
+  avatarUpload(data){
+    let data_obj = JSON.parse(data.response);
+    this.user.image = data_obj.user.image;
+    //console.log(this.user);
   }
 
-  onSubmit(form){}
+  onSubmit(form) { }
+  
+  ngOnInit() {
+  }
+
 
 }

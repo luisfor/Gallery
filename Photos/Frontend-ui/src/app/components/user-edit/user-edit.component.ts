@@ -43,8 +43,15 @@ export class UserEditComponent implements OnInit {
       theme: "attachPin",
       hideProgressBar: false,
       hideResetBtn: true,
-      hideSelectBtn: false,
-      attachPinText: 'Upload Photo'
+      hideSelectBtn: false,replaceTexts: {
+        selectFileBtn: 'Select Files',
+        resetBtn: 'Reset',
+        uploadBtn: 'Upload',
+        dragNDropBox: 'Drag N Drop',
+        attachPinBtn: 'Upload Photo',
+        afterUploadMsg_success: 'Successfully Uploaded !',
+        afterUploadMsg_error: 'Upload Failed !'
+      }
     };
   }
 

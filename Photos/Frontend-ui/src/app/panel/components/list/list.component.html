@@ -9,6 +9,7 @@
             <img class="card-img-top" src="{{ url + 'image-photo/' + photos.image}}" alt="{{photos.name}}">
             <div class="card-body">
                 <h5 class="card-title">{{photos.name}}</h5>
+                <p class="card-text"><small class="text-muted">{{photos.date | amLocale: 'us' | amDateFormat:'LL'}}</small></p>
             </div>
         </div>
         

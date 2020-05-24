@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { PanelRoutingModule } from './panel-routing.module';
 import { AngularFileUploaderModule } from 'angular-file-uploader';
-
+import { MomentModule } from 'angular2-moment';
 
 
 //route components
@@ -29,7 +29,8 @@ import { DeleteComponent } from './components/delete/delete.component';
         FormsModule,
         HttpClientModule,
         PanelRoutingModule,
-        AngularFileUploaderModule
+        AngularFileUploaderModule,
+        MomentModule
     ],
     providers: []
 })

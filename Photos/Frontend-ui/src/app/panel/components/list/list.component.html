@@ -3,16 +3,40 @@
     <hr />
     <div class="card-columns">
         <div class="card " *ngFor="let photos of photo">
-            <button type="button" class="close mr-2 text-danger" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+
             <img class="card-img-top" src="{{ url + 'image-photo/' + photos.image}}" alt="{{photos.name}}">
             <div class="card-body">
                 <h5 class="card-title">{{photos.name}}</h5>
-                <p class="card-text"><small class="text-muted">{{photos.date | amLocale: 'us' | amDateFormat:'LL'}}</small></p>
+                <p class="card-text"><small
+                        class="text-muted">{{photos.date | amLocale: 'us' | amDateFormat:'LL'}}</small></p>
+                <button type="button" class="close text-danger " aria-label="Close" data-toggle="modal"
+                    [attr.data-target]="'#modal'+photos._id">
+                    &times;
+                </button>
             </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="{{ 'modal'+photos._id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title text-center" id="exampleModalLabel">
+                                sure you want to delete this photo from your gallery</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success" data-dismiss="modal">No</button>
+                            <a  class="btn btn-danger text-white" data-dismiss="modal">yes</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
-        
+
 
 
     </div>

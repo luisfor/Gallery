@@ -22,7 +22,7 @@ export class UserService {
         let params = JSON.stringify(user);
 
         //define the header
-        let headers = new HttpHeaders().set(' content-type', 'application/json');
+        let headers = new HttpHeaders().set(' Content-type', 'application/json');
 
         //make ajax request
         return this._http.post(this.url + 'register', params, { headers: headers });
@@ -35,7 +35,7 @@ export class UserService {
             user.gettoken = gettoken;
         }
         let params = JSON.stringify(user);
-        let headers = new HttpHeaders().set('content-type', 'application/json');
+        let headers = new HttpHeaders().set('Content-type', 'application/json');
 
 
         return this._http.post(this.url + 'login', params, { headers: headers });

@@ -19,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserService } from './services/user.service';
 import { UserGuard } from './services/user.guard';
 import { NoIdentityGuard } from './services/no.identity.guard';
+import { SearchComponent } from './panel/components/search/search.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { NoIdentityGuard } from './services/no.identity.guard';
     RegisterComponent,
     LoginComponent,
     HomeComponent,
-    UserEditComponent
+    UserEditComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

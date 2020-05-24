@@ -11,6 +11,7 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { UserEditComponent } from './components/user-edit/user-edit.component';
+import { SearchComponent } from './panel/components/search/search.component';
 
 //route array
 const appRoutes: Routes = [ 
@@ -19,6 +20,7 @@ const appRoutes: Routes = [
     { path: 'login', canActivate:[NoIdentityGuard], component: LoginComponent },
     { path: 'register', canActivate:[NoIdentityGuard], component: RegisterComponent },
     { path: 'settings', canActivate:[UserGuard], component: UserEditComponent},
+    { path: 'search/:search', canActivate:[UserGuard], component: SearchComponent },
     { path: '**', component: LoginComponent }
 
 ];

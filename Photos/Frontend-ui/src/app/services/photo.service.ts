@@ -65,5 +65,8 @@ export class PhotoService {
     return this._http.delete(this.url + 'photo/'+id, { headers: headers });
         
     }
+    search(searchString): Observable<any>{
+        return this._http.get(this.url+'search/'+searchString);
+    }
 
 }

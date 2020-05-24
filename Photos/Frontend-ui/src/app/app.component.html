@@ -21,6 +21,18 @@
           <a class="nav-link" href="#">
             Album
           </a>
+        </li>
+        <li class="nav-item" *ngIf="identity">
+          <div class="input-group">
+              <form class="input-group my-2 my-lg-0" #searchForm="ngForm">
+                  <input type="search" class="form-control mr-sm-2" name="searchs" placeholder="Search Photo" #searchs="ngModel" [(ngModel)]="search" aria-label="Search Photo"
+                      aria-describedby="basic-addon2">
+                  <div class="input-group-append">
+                      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="goSearch()" >Search</button>
+                  </div>
+              </form>
+          </div>
+      </li>
       </ul>
       <ul class="navbar-nav navbar-right">
         <li class="nav-item " *ngIf="!identity">

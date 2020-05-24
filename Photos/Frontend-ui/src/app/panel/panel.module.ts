@@ -18,6 +18,11 @@ import { DeleteComponent } from './components/delete/delete.component';
 //services
 import { UserService } from '../services/user.service';
 import { UserGuard } from '../services/user.guard';
+import { AddAlbumComponent } from './components/add-album/add-album.component';
+import { DeleteAlbumComponent } from './components/delete-album/delete-album.component';
+import { ListAlbumComponent } from './components/list-album/list-album.component';
+import { AddPhotoAlbumComponent } from './components/add-photo-album/add-photo-album.component';
+import { DeletePhotoAlbumComponent } from './components/delete-photo-album/delete-photo-album.component';
 
 
 @NgModule({
@@ -26,7 +31,12 @@ import { UserGuard } from '../services/user.guard';
         AddComponent,
         EditComponent,
         ListComponent,
-        DeleteComponent
+        DeleteComponent,
+        AddAlbumComponent,
+        DeleteAlbumComponent,
+        ListAlbumComponent,
+        AddPhotoAlbumComponent,
+        DeletePhotoAlbumComponent
     ],
     imports: [
         CommonModule,

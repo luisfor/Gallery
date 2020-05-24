@@ -349,7 +349,21 @@ let controller = {
                 image: file_name
             });
         }
-    }
+    },
+    photoFileName: function (req, res) {
+        let fileName = req.params.fileName;
+        let pathFile = './uploads/photos/' + fileName;
+
+        fs.exists(pathFile, (exists) => {
+            if (exists) {
+                return res.sendFile(path.resolve(pathFile));
+            } else {
+                return res.status(404).send({
+                    message: 'Image does not exist'
+                });
+            }
+        });
+    },
 
 };
 

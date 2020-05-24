@@ -21,6 +21,7 @@ router.put('/photo/:id', md_auth.authenticated, PhotoController.update);
 router.delete('/photo/:id', md_auth.authenticated, PhotoController.delete);
 router.get('/search/:search', PhotoController.search);
 router.post('/upload-photo', [md_auth.authenticated, md_upload], PhotoController.uploadPhoto);
+router.get('/image-photo/:fileName', PhotoController.photoFileName);
 
 
 module.exports = router;

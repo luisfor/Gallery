@@ -44,8 +44,17 @@ export class PhotoService {
         let headers = new HttpHeaders().set('Content-type', 'application/json')
             .set('Authorization', this.getToken());
 
-        return this._http.post(this.url + 'photo', params, {headers: headers});
+        return this._http.post(this.url + 'photo', params, { headers: headers });
     }
-    
+
+    getPhotoByUser(userId): Observable<any> {
+
+        let headers = new HttpHeaders().set('Content-type', 'application/json')
+            .set('Authorization', this.getToken());
+
+        return this._http.get(this.url + 'user-photos/'+userId, { headers: headers });
+
+
+    }
 
 }

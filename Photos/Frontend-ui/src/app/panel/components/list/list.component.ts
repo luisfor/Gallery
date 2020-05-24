@@ -1,15 +1,59 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+
+import { Photo } from '../../../models/photo';
+import { UserService } from '../../../services/user.service';
+import { PhotoService } from '../../../services/photo.service';
+import { global } from '../../../services/global';
 
 @Component({
-  selector: 'app-list',
+  selector: 'list',
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.css']
+  styleUrls: ['./list.component.css'],
+  providers: [UserService, PhotoService]
 })
 export class ListComponent implements OnInit {
 
-  constructor() { }
+  public page_title: string;
+  public photo: Photo;
+  public identity;
+  public token;
+  public status;
+  public afuConfig;
+  public url;
 
-  ngOnInit(): void {
+  constructor(
+    private _route: ActivatedRoute,
+    private _router: Router,
+    private _userService: UserService,
+    private _photoService: PhotoService
+  ) {
+    this.page_title = 'My Gallery';
+    this.identity = this._userService.getIdentity();
+    this.token = this._userService.getToken();
+    this.url = global.url;
+
+
+  }
+
+  ngOnInit() {
+    this.getPhoto();
+  }
+
+  getPhoto() {
+    let userId = this.identity._id;
+    this._photoService.getPhotoByUser(userId).subscribe(
+      response => {
+        if (response.photo) {
+          this.photo = response.photo;
+          
+        }
+      },
+      error => {
+        console.log(error);
+
+      }
+    );
   }
 
 }

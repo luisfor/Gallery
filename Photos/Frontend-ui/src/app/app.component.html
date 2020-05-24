@@ -27,7 +27,7 @@
           <a class="nav-link" href="#" [routerLink]="['/login']">Login</a>
         </li>
         <li class="nav-item" *ngIf="identity">
-          <div class="avatar_mask">
+          <div class="avatar_mask" *ngIf="identity.image">
             <img src="{{ url + 'avatar/' + identity.image}}" class=" avatar_nav">
           </div>
         </li>

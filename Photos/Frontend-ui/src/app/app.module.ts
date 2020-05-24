@@ -15,6 +15,10 @@ import { HomeComponent } from './components/home/home.component';
 import { UserEditComponent } from './components/user-edit/user-edit.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+//services
+import { UserService } from './services/user.service';
+import { UserGuard } from './services/user.guard';
+import { NoIdentityGuard } from './services/no.identity.guard';
 
 
 @NgModule({
@@ -36,7 +40,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MomentModule
   ],
   providers: [
-    appRoutingProviders
+    appRoutingProviders,
+    UserService,
+    UserGuard,
+    NoIdentityGuard
   ],
   bootstrap: [AppComponent]
 })

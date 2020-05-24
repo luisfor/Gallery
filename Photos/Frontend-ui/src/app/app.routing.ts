@@ -3,6 +3,8 @@
 
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { UserGuard } from './services/user.guard';
+import { NoIdentityGuard } from './services/no.identity.guard';
 
 //import components
 import { HomeComponent } from './components/home/home.component';
@@ -14,9 +16,9 @@ import { UserEditComponent } from './components/user-edit/user-edit.component';
 const appRoutes: Routes = [ 
     { path: '', component: HomeComponent },
     { path: 'home', component: HomeComponent },
-    { path: 'login', component: LoginComponent },
-    { path: 'register', component: RegisterComponent },
-    { path: 'settings', component: UserEditComponent},
+    { path: 'login', canActivate:[NoIdentityGuard], component: LoginComponent },
+    { path: 'register', canActivate:[NoIdentityGuard], component: RegisterComponent },
+    { path: 'settings', canActivate:[UserGuard], component: UserEditComponent},
     { path: '**', component: LoginComponent }
 
 ];

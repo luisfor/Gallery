@@ -15,6 +15,10 @@ import { EditComponent } from './components/edit/edit.component';
 import { ListComponent } from './components/list/list.component';
 import { DeleteComponent } from './components/delete/delete.component';
 
+//services
+import { UserService } from '../services/user.service';
+import { UserGuard } from '../services/user.guard';
+
 
 @NgModule({
     declarations: [
@@ -32,7 +36,10 @@ import { DeleteComponent } from './components/delete/delete.component';
         AngularFileUploaderModule,
         MomentModule
     ],
-    providers: []
+    providers: [
+        UserService,
+        UserGuard
+    ]
 })
 
 export class PanelModule {}

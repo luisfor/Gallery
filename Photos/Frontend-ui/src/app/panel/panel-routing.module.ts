@@ -8,6 +8,7 @@ import { AddComponent } from './components/add/add.component';
 import { EditComponent } from './components/edit/edit.component';
 import { ListComponent } from './components/list/list.component';
 import { DeleteComponent } from './components/delete/delete.component';
+import { UserGuard } from '../services/user.guard';
 
 
 
@@ -15,6 +16,7 @@ const panelRoutes: Routes = [
     {
         path: 'panel',
         component: MainComponent,
+        canActivate: [UserGuard],
         children: [
             { path: '', component: ListComponent },
             { path: 'add', component: AddComponent },

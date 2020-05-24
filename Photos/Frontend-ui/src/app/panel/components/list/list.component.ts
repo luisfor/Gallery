@@ -56,4 +56,15 @@ export class ListComponent implements OnInit {
     );
   }
 
+  deletePhoto(id){
+    this._photoService.deletePhotoById(this.token, id).subscribe(
+      response => {
+        this.getPhoto();
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
 }

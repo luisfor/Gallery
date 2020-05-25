@@ -1,0 +1,7 @@
+.card-bodys{
+    height: 140px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+}

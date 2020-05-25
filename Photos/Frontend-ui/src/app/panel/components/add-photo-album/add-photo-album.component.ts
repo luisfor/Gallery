@@ -74,10 +74,27 @@ export class AddPhotoAlbumComponent implements OnInit {
     this._route.params.subscribe(params => {
       this.idAlbum = params['id'];
       //console.log(idAlbum);
-      this._photoService.getPhotoByUser(userId).subscribe(
+      this._photoService.getPhotoByUserAlbumList(userId).subscribe(
         response => {
           if (response.photo) {
-            this.photo = response.photo;
+            //this.photo = response.photo;
+            this.photo = new Array();
+            response.photo.forEach(element => {
+              //this.photo.push(element);              
+              this._albumService.getPhotoByIdGroupAlbum(element._id).subscribe(
+                data => {
+
+                  if (data.groupPhoto.length == 0) {
+                    this.photo.push(element);
+                  }
+
+                },
+                error => {
+                  console.log(error);
+                }
+              );
+            });
+            //console.log(this.photo);
           }
         },
         error => {
@@ -90,26 +107,26 @@ export class AddPhotoAlbumComponent implements OnInit {
   }
 
   addPhotoAlbum(id, id_album) {
-     // this.idPhoto = id;
-     // this.idAlbum = id_album;
-      this.groupPhoto.photo = id;
-      this.groupPhoto.album = id_album;
+    // this.idPhoto = id;
+    // this.idAlbum = id_album;
+    this.groupPhoto.photo = id;
+    this.groupPhoto.album = id_album;
 
     //console.log('idPhoto:', this.idPhoto);
     //console.log('idAlbum:', this.idAlbum);
-   // console.log('user:', this.identity._id);
-    
-    
+    // console.log('user:', this.identity._id);
+
+
     this._albumService.addPhotoAlbums(this.token, this.groupPhoto).subscribe(
       response => {
-         if (response.album) {
+        if (response.album) {
           this.status = 'success';
           this.groupPhoto = response.groupPhoto;
           console.log(this.groupPhoto);
-          
+
           //this._router.navigate(['panel/listAlbum']);
         } else {
-          this.status = 'error';   
+          this.status = 'error';
         }
       },
       error => {

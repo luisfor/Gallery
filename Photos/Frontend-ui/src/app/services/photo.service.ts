@@ -57,6 +57,16 @@ export class PhotoService {
 
     }
 
+    getPhotoByUserAlbumList(userId): Observable<any> {
+
+        let headers = new HttpHeaders().set('Content-type', 'application/json')
+            .set('Authorization', this.getToken());
+
+        return this._http.get(this.url + 'user-photos/'+userId, { headers: headers });
+
+
+    }
+
     deletePhotoById(token, id): Observable<any>{
 
         let headers = new HttpHeaders().set('Content-type', 'application/json')

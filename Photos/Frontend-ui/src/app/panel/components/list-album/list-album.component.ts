@@ -30,7 +30,7 @@ export class ListAlbumComponent implements OnInit {
     private _photoService: PhotoService,
     private _albumService: AlbumService
   ) {
-    this.page_title = 'your albums';
+    this.page_title = 'My Albums';
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
     this.url = global.url;

@@ -56,6 +56,15 @@ export class AlbumService {
 
     }
 
+    getPhotoByIdGroupAlbum(photoId): Observable<any> {
+
+        let headers = new HttpHeaders().set('Content-type', 'application/json');
+
+        return this._http.get(this.url + 'PhotoByIdGroupAlbum/'+photoId, { headers: headers });
+
+
+    }
+
     addPhotoAlbums(token, album): Observable<any> {
 
         let params = JSON.stringify(album);
@@ -65,6 +74,16 @@ export class AlbumService {
             .set('Authorization', this.getToken());
 
         return this._http.post(this.url + 'groupPhoto', params, { headers: headers });
+    }
+
+    getAlbumBy(idAlbum): Observable<any> {
+
+        let headers = new HttpHeaders().set('Content-type', 'application/json')
+            .set('Authorization', this.getToken());
+
+        return this._http.get(this.url + 'groupPhoto/'+idAlbum, { headers: headers });
+
+
     }
 /*
     deletePhotoById(token, id): Observable<any>{

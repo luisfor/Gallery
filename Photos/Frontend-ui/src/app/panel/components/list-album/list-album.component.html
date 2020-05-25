@@ -5,7 +5,15 @@
     <h3>{{page_title}}</h3>
     <hr />
     <div class="card-columns">
-        <a class="card mb-3 mr-3 text-capitalize pointer text-decoration-none bg-light" style="max-width: 18rem; max-height: 18rem; Height: 100%" *ngFor="let albums of album" [routerLink]="['/panel/addPhototAlbum', albums._id]">
+        <a class="card mb-3 mr-3 text-capitalize pointer text-decoration-none bg-light"
+            style="max-width: 18rem; max-height: 18rem; Height: 100%" [routerLink]="['/panel/addAlbum']">
+            <div class="card-body text-success">
+                <p class="card-text text-center font-weight-bold">Add Album</p>
+            </div>
+        </a>
+        <a class="card mb-3 mr-3 text-capitalize pointer text-decoration-none bg-light"
+            style="max-width: 18rem; max-height: 18rem; Height: 100%" *ngFor="let albums of album"
+            [routerLink]="['/panel/ListPhotoAlbum', albums._id]">
             <div class="card-body text-close">
                 <p class="card-text text-center  text-muted">{{albums.name}}</p>
             </div>

@@ -13,6 +13,7 @@ let md_auth = require('../middlewares/authenticated');
 router.post('/groupPhoto', md_auth.authenticated, GroupPhotoController.save);
 router.delete('/groupPhoto/:id', md_auth.authenticated, GroupPhotoController.deleteGroupPhoto);
 router.get('/groupPhoto/:id', GroupPhotoController.getGroupPhotoById);
+router.get('/PhotoByIdGroupAlbum/:id', GroupPhotoController.getPhotoByIdGroupAlbum);
 
 
 module.exports = router;

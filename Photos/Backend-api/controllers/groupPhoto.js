@@ -12,7 +12,7 @@ let controller = {
         //collect the parameters
         let params = req.body;
         //console.log(params);
-        
+
         //validate the data
         try {
             validate_photo = !validator.isEmpty(params.photo);
@@ -110,6 +110,35 @@ let controller = {
 
         //search by Album id
         GroupPhoto.find({ album: albumId })
+            .populate('photo')
+            .populate('user')
+            .populate('album')
+            .exec((err, groupPhoto) => {
+                if (err) {
+                    return res.status(500).send({
+                        status: 'error',
+                        message: 'error in the request'
+                    });
+                }
+                if (!groupPhoto) {
+                    return res.status(404).send({
+                        status: 'error',
+                        message: 'No groupPhoto to show'
+                    });
+                }
+                //return results
+                return res.status(200).send({
+                    status: 'success',
+                    groupPhoto
+                });
+            });
+    },
+    getPhotoByIdGroupAlbum: function (req, res) {
+        //get the id of the groupPhoto that comes from the url
+        let photoId = req.params.id;
+
+        //search by Album id
+        GroupPhoto.find({ photo: photoId })
             .populate('photo')
             .populate('user')
             .populate('album')

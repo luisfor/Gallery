@@ -13,6 +13,7 @@ import { ListAlbumComponent } from './components/list-album/list-album.component
 import { AddPhotoAlbumComponent } from './components/add-photo-album/add-photo-album.component';
 import { DeleteAlbumComponent } from './components/delete-album/delete-album.component';
 import { DeletePhotoAlbumComponent } from './components/delete-photo-album/delete-photo-album.component';
+import { ListPhotoAlbumComponent } from './components/list-photo-album/list-photo-album.component';
 import { UserGuard } from '../services/user.guard';
 
 
@@ -31,8 +32,9 @@ const panelRoutes: Routes = [
             { path: 'addAlbum', component: AddAlbumComponent },
             { path: 'listAlbum', component: ListAlbumComponent },
             { path: 'addPhototAlbum/:id', component: AddPhotoAlbumComponent },
-            { path: 'DeleteAlbum', component: DeleteAlbumComponent },
-            { path: 'DeletePhotoAlbum', component: DeletePhotoAlbumComponent }
+            { path: 'DeleteAlbum/:id', component: DeleteAlbumComponent },
+            { path: 'DeletePhotoAlbum/:id', component: DeletePhotoAlbumComponent },
+            { path: 'ListPhotoAlbum/:id', component: ListPhotoAlbumComponent }
         ]
 
     }

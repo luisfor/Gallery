@@ -15,7 +15,7 @@ import { global } from '../../../services/global';
 export class ListComponent implements OnInit {
 
   public page_title: string;
-  public photo: Photo;
+  public photo: Photo[];
   public identity;
   public token;
   public status;
@@ -45,7 +45,7 @@ export class ListComponent implements OnInit {
     this._photoService.getPhotoByUser(userId).subscribe(
       response => {
         if (response.photo) {
-          this.photo = response.photo;
+          this.photo = response.photo;          
         }
       },
       error => {

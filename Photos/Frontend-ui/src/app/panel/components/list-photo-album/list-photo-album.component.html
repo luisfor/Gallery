@@ -1,1 +1,37 @@
-<p>list-photo-album works!</p>
+<div class="col-lg-12 mt-3" *ngIf="!groupPhoto">
+  <img src="../../../../assets/img/loading.gif" alt="">
+</div>
+<div class="col-lg-12" *ngIf="groupPhoto">
+  <h3>{{page_title}}</h3>
+  <hr />
+  <div class="card-columns">
+    <a class="card mb-3 mr-3 text-capitalize pointer text-decoration-none bg-light"
+      style="max-width: 18rem; max-height: 18rem; Height: 100%" [routerLink]="['/panel/addPhototAlbum', idAlbum]">
+      <div class="card-bodys text-success">
+        <p class="card-text text-center font-weight-bold">Add Photo</p>
+      </div>
+    </a>
+
+    <div class="card " *ngFor="let groupPhotos of groupPhoto">
+
+      <img class="card-img-top pointer" src="{{ url + 'image-photo/' + groupPhotos.photo.image }}"
+        alt="{{groupPhotos.photo.name}}" data-toggle="modal" [attr.data-target]="'#modal1'+groupPhotos.album._id">
+      <div class="card-body">
+        <h5 class="card-title text-capitalize">{{groupPhotos.photo.name}}</h5>
+        <p class="card-text"><small
+            class="text-muted">{{groupPhotos.photo.date | amLocale: 'us' | amDateFormat:'LL'}}</small></p>
+        <button aria-label="Delete" class="btn btn-success position-absolute btn-delete-right">select</button>
+      </div>
+
+
+
+
+
+    </div>
+
+
+
+
+
+  </div>
+</div>

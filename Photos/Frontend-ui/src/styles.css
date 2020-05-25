@@ -9,3 +9,12 @@
 .avatar_mask img{
     height: 60px;
 }
+
+.pointer {cursor: pointer;}
+
+.btn-delete-right{
+    right: 0;
+    bottom: 0;
+    margin-bottom: 6px !important;
+    margin-right: 6px !important;
+}

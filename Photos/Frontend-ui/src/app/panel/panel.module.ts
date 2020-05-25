@@ -23,6 +23,7 @@ import { DeleteAlbumComponent } from './components/delete-album/delete-album.com
 import { ListAlbumComponent } from './components/list-album/list-album.component';
 import { AddPhotoAlbumComponent } from './components/add-photo-album/add-photo-album.component';
 import { DeletePhotoAlbumComponent } from './components/delete-photo-album/delete-photo-album.component';
+import { ListPhotoAlbumComponent } from './components/list-photo-album/list-photo-album.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { DeletePhotoAlbumComponent } from './components/delete-photo-album/delet
         DeleteAlbumComponent,
         ListAlbumComponent,
         AddPhotoAlbumComponent,
-        DeletePhotoAlbumComponent
+        DeletePhotoAlbumComponent,
+        ListPhotoAlbumComponent
     ],
     imports: [
         CommonModule,

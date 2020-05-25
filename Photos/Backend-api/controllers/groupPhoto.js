@@ -11,11 +11,12 @@ let controller = {
 
         //collect the parameters
         let params = req.body;
-
+        //console.log(params);
+        
         //validate the data
         try {
-            validate_photo = !validator.isEmpty(params.photoId);
-            validate_album = !validator.isEmpty(params.albumId);
+            validate_photo = !validator.isEmpty(params.photo);
+            validate_album = !validator.isEmpty(params.album);
         } catch (err) {
             //return answer
             res.status(404).send({
@@ -29,13 +30,13 @@ let controller = {
             let groupPhoto = new GroupPhoto();
 
             //assign values
-            groupPhoto.photo = params.photoId;
-            groupPhoto.album = params.albumId;
+            groupPhoto.photo = params.photo;
+            groupPhoto.album = params.album;
             groupPhoto.user = req.user.sub;
             groupPhoto.state = true;
 
             //check that the photo is not registered in another album
-            let photoById = params.photoId;
+            let photoById = params.photo;
             GroupPhoto.find({ photo: photoById }).exec((err, groupPhotoId) => {
                 if (err) {
                     return res.status(500).send({
@@ -111,6 +112,7 @@ let controller = {
         GroupPhoto.find({ album: albumId })
             .populate('photo')
             .populate('user')
+            .populate('album')
             .exec((err, groupPhoto) => {
                 if (err) {
                     return res.status(500).send({

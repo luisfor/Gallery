@@ -30,7 +30,7 @@ const panelRoutes: Routes = [
             { path: 'update/:id', component: EditComponent },
             { path: 'addAlbum', component: AddAlbumComponent },
             { path: 'listAlbum', component: ListAlbumComponent },
-            { path: 'addPhototAlbum', component: AddPhotoAlbumComponent },
+            { path: 'addPhototAlbum/:id', component: AddPhotoAlbumComponent },
             { path: 'DeleteAlbum', component: DeleteAlbumComponent },
             { path: 'DeletePhotoAlbum', component: DeletePhotoAlbumComponent }
         ]

@@ -46,7 +46,6 @@ export class ListComponent implements OnInit {
       response => {
         if (response.photo) {
           this.photo = response.photo;
-          
         }
       },
       error => {

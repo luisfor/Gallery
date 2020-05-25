@@ -1,1 +1,29 @@
-<p>add-photo-album works!</p>
+<div class="col-lg-12 mt-3" *ngIf="!photo">
+    <img src="../../../../assets/img/loading.gif" alt="">
+  </div>
+  <div class="col-lg-12" *ngIf="photo">
+    <h3>{{page_title}}</h3>
+    <hr />
+    <div class="card-columns">
+      <div class="card " *ngFor="let photos of photo">
+  
+        <img class="card-img-top pointer" src="{{ url + 'image-photo/' + photos.image }}" alt="{{photos.name}}"
+          data-toggle="modal" [attr.data-target]="'#modal1'+photos._id">
+        <div class="card-body">
+          <h5 class="card-title text-capitalize">{{photos.name}}</h5>
+          <p class="card-text"><small class="text-muted">{{photos.date | amLocale: 'us' | amDateFormat:'LL'}}</small></p>
+          <button aria-label="Delete" class="btn btn-success position-absolute btn-delete-right" (click)="addPhotoAlbum(photos._id, idAlbum)">select</button>
+        </div>
+  
+  
+  
+  
+  
+      </div>
+  
+  
+  
+  
+  
+    </div>
+  </div>

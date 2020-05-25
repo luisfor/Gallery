@@ -1,1 +1,17 @@
-<p>list-album works!</p>
+<div class="col-lg-12 mt-3" *ngIf="!album">
+    <img src="../../../../assets/img/loading.gif" alt="">
+</div>
+<div class="col-lg-12" *ngIf="album">
+    <h3>{{page_title}}</h3>
+    <hr />
+    <div class="card-columns">
+        <a class="card mb-3 mr-3 text-capitalize pointer text-decoration-none bg-light" style="max-width: 18rem; max-height: 18rem; Height: 100%" *ngFor="let albums of album" [routerLink]="['/panel/addPhototAlbum', albums._id]">
+            <div class="card-body text-close">
+                <p class="card-text text-center  text-muted">{{albums.name}}</p>
+            </div>
+        </a>
+    </div>
+
+
+
+</div>

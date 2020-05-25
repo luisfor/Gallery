@@ -119,12 +119,10 @@ export class AddPhotoAlbumComponent implements OnInit {
 
     this._albumService.addPhotoAlbums(this.token, this.groupPhoto).subscribe(
       response => {
-        if (response.album) {
-          this.status = 'success';
+        if (response.groupPhoto) {
+          //console.log(this.groupPhoto);
+          this._router.navigate(['panel/ListPhotoAlbum/'+this.groupPhoto.album]);
           this.groupPhoto = response.groupPhoto;
-          console.log(this.groupPhoto);
-
-          //this._router.navigate(['panel/listAlbum']);
         } else {
           this.status = 'error';
         }

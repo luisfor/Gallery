@@ -27,6 +27,7 @@ export class ListPhotoAlbumComponent implements OnInit {
   public url;
   public idAlbum;
   public idPhoto;
+  public title: string;
 
   constructor(
     private _route: ActivatedRoute,
@@ -35,37 +36,16 @@ export class ListPhotoAlbumComponent implements OnInit {
     private _photoService: PhotoService,
     private _albumService: AlbumService
   ) {
-    this.page_title = 'list photo album';
+    this.page_title = 'list photo album ';
     this.identity = this._albumService.getIdentity();
     this.token = this._albumService.getToken();
     this.url = global.url;
   }
 
   ngOnInit() {
-    /* this._route.params.subscribe(params => {
-       let search = params['search'];
-       this.page_title = this.page_title;
-       this.getPhotoSearch(search);
-     });*/
     this.getPhotoAlbumById();
   }
-  /*
-    getPhotoSearch(search){
-      this._photoService.search(search).subscribe(
-        response => {
-          if (response.photo) {
-            this.photo = response.photo;
-          } else {
-            
-          }
-        },
-        error => {
-          console.log(error);
-          
-        }
-      );
-    }
-  */
+
 
   getPhotoAlbumById() {
     let userId = this.identity._id;
@@ -76,8 +56,12 @@ export class ListPhotoAlbumComponent implements OnInit {
         response => {
           if (response.groupPhoto == []) {
             console.log(this.status);
-          } else {
+          } 
+          if (response.groupPhoto.length > 0) {
             this.groupPhoto = response.groupPhoto;
+            this.title = this.groupPhoto[0].album.name;
+            this.page_title = 'list photo album ' + this.title;
+           //console.log(this.groupPhoto); 
           }
         },
         error => {
@@ -88,5 +72,37 @@ export class ListPhotoAlbumComponent implements OnInit {
 
     });
   }
+
+  deletePhotoAlbum(id){
+    this._albumService.deletePhotoAlbumById(this.token, id).subscribe(
+      response => {
+        
+         //this._router.navigate(['panel/ListPhotoAlbum/'+response.album.album]);
+         //this.getPhotoAlbumById();
+        window.location.reload();
+          //console.log(response);
+
+          
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+
+  deleteAlbum(id){
+    this._albumService.deleteAlbumById(this.token, id).subscribe(
+      response => {
+        this._router.navigate(['panel/listAlbum']);  
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+
+
 
 }

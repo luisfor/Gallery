@@ -18,10 +18,6 @@
       <div class="card-body">
         <h5 class="card-title text-capitalize">{{photos.name}}</h5>
         <p class="card-text"><small class="text-muted">{{photos.date | amLocale: 'us' | amDateFormat:'LL'}}</small></p>
-        <!--<button type="button" class="close text-danger " aria-label="Close" data-toggle="modal"
-                    [attr.data-target]="'#modal'+photos._id">
-                    x
-                </button>-->
         <button aria-label="Delete" class="btn btn-danger position-absolute btn-delete-right" data-toggle="modal"
           [attr.data-target]="'#modal'+photos._id">delete</button>
       </div>

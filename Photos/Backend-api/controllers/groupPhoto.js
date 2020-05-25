@@ -81,6 +81,9 @@ let controller = {
         //get the url id
         let groupPhotoId = req.params.id;
 
+        //console.log(groupPhotoId);
+        
+
         //search the groupPhoto in the bd to delete it
         GroupPhoto.findOneAndDelete({ _id: groupPhotoId, user: req.user.sub }, (err, groupPhotoRemoved) => {
 

@@ -112,7 +112,7 @@ http://localhost:3000/api/login
 upon logging in he receives a token that they must see adding a parameter called gettoken and as a value: true this token will serve them to be able to update edit, among other things since it is a JWT key
 <p align="left">
   <a href="">
- <img width=500px height=25px src="Photo/imageReadme/gettoken.JPG" alt="GetToken"></a>
+ <img width=500px height=25px src="Photos/imageReadme/gettoken.JPG" alt="GetToken"></a>
 </p>
 
 3. path to update user and receive the following parameters: username, surname, email, password.

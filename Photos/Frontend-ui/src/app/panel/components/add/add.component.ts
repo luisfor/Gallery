@@ -69,7 +69,7 @@ export class AddComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this._photoService.test());
+    //console.log(this._photoService.test());
 
   }
 

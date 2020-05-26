@@ -13,7 +13,7 @@ export class UserService {
         this.url = global.url;
     }
     test() {
-        return "";
+        return "service register";
     }
 
     register(user): Observable<any> {
@@ -22,10 +22,10 @@ export class UserService {
         let params = JSON.stringify(user);
 
         //define the header
-        let headers = new HttpHeaders().set(' Content-type', 'application/json');
+        let headers = new HttpHeaders().set('Content-type', 'application/json');
 
         //make ajax request
-        return this._http.post(this.url + 'register', params, { headers: headers });
+        return this._http.post(this.url+'register', params, { headers: headers });
     }
 
     signup(user, gettoken = null): Observable<any> {
@@ -69,7 +69,7 @@ export class UserService {
         let headers = new HttpHeaders().set('content-type', 'application/json')
             .set('Authorization', this.getToken());
 
-        return this._http.put(this.url + 'user/update', params, {headers: headers});
+        return this._http.put(this.url + 'user/update', params, { headers: headers });
     }
 
 }

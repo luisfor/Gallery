@@ -22,9 +22,11 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this._userService.test());
+    //console.log(this._userService.test());
   }
   onSubmit(form) {
+   // console.log(this.user);
+    
     this._userService.register(this.user).subscribe(
       response => {
         if (response.user && response.user._id) {

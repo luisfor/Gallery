@@ -61,6 +61,8 @@ C:\Program Files\MongoDB\Server\4.0\bin
 
 4. install postman sister to test with apis, Download here [postman](https://www.postman.com/)
 
+5. the view project made with angular 9.1.0 and you should install this version for compatibility with some dependencies.
+
 ### Installing
 
 A step by step series of examples that tell you how to get a development env running.
@@ -68,6 +70,7 @@ A step by step series of examples that tell you how to get a development env run
 run the project
 
 1. download or clone the project.
+
 2. install the libraries, dependencies and packages so that the project can work.
 
 ``` 
@@ -93,6 +96,25 @@ start the project in developer mode
 ``` 
 npm run developer
 ```
+7. install angular 9.1.0
+
+``` 
+npm install -g @angular/cli@9.1.0
+```
+
+8. in the main folder of the view open a command window and run the following
+
+``` 
+Photos\Frontend-ui> npm install
+```
+9. run the project in 
+
+``` 
+Photos\Frontend-ui> ng serve
+```
+10. in the browser put the following 
+
+http://localhost:4200/
 
 ## 🎈 Usage <a name="usage"></a>
 
@@ -245,6 +267,11 @@ http://localhost:3000/api/groupPhoto/id
 3. show photos of an added to an album by the album id
 ``` 
 http://localhost:3000/api/groupPhoto/id
+```
+4. Show the photos by ide that is grouped in each folder
+
+``` 
+http://localhost:3000/api/PhotoByIdGroupAlbum/id
 ```
 
 ## 🚀 Deployment <a name = "deployment"></a>

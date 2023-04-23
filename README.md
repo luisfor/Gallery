@@ -61,7 +61,7 @@ to use this software you need
 C:\Program Files\MongoDB\Server\4.0\bin
 ```
 
-4. install postman sister to test with apis, Download here [postman](https://www.postman.com/)
+4. install postman sister to test with apis, Download here [postman]([https://www.postman.com/](https://www.postman.com/downloads/))
 
 5. the view project made with angular 9.1.0 and you should install this version for compatibility with some dependencies.
 

@@ -53,7 +53,7 @@ to use this software you need
 
 1. install nodejs and npm latest version, Download here [nodejs](https://nodejs.org/es/).
 
-2. Install mongo db community latest version, Download here [mongodb](https://nodejs.org/es/).
+2. Install mongo db community latest version, Download here [mongodb]([https://nodejs.org/es/](https://www.mongodb.com/try/download/community)).
 
 3. add mongodb environment variables
 
